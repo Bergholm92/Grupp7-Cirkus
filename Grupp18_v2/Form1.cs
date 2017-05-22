@@ -26,5 +26,10 @@ namespace Grupp18_v2
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
