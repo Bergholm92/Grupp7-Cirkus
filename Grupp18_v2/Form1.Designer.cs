@@ -71,7 +71,7 @@
             this.Controls.Add(this.lblWelcome);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cirkus Kul & Bus";
             this.ResumeLayout(false);
             this.PerformLayout();
 
