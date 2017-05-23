@@ -20,9 +20,7 @@ namespace Grupp18_v2
         public int Medlemstyp_id { get; set; }
         public int Malsman_id { get; set; }
         public int personnummer { get; set; }
-        
-
-        
+       
     }
 
    
