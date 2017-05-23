@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grupp18_v2
 {
-    class Medlem
+   public class Medlem
     {
         public int Medlems_id { get; set; }
         public string Förnamn { get; set; }
