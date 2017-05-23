@@ -31,7 +31,6 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnLedare = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -65,20 +64,11 @@
             this.btnLedare.Text = "Ledare";
             this.btnLedare.UseVisualStyleBackColor = true;
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 22);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 134);
-            this.listBox1.TabIndex = 3;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 236);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnLedare);
             this.Controls.Add(this.btnAdmin);
             this.Controls.Add(this.lblWelcome);
@@ -94,7 +84,6 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Button btnLedare;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
