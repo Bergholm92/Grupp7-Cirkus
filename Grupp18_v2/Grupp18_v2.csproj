@@ -60,7 +60,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Malsman.cs" />
     <Compile Include="Medlem.cs" />
+    <Compile Include="Medlemstyp.cs" />
     <Compile Include="Plats.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
