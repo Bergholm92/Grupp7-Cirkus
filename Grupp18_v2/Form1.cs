@@ -15,6 +15,7 @@ namespace Grupp18_v2
     {
 
         NpgsqlConnection conn = new NpgsqlConnection("Server = webblabb.miun.se; Port=5432;User Id = db_g7; Password=cirkus88; Database=db_g7;");
+        
 
         public Form1()
         {
