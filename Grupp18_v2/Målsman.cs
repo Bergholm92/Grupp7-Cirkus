@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Grupp18_v2
 {
-    class Målsman
+    public class Målsman
     {
+        public int MålsmanID { get; set; }
+        public string Förnamn { get; set; }
+        public string Efternamn { get; set; }
+        public string Telefonnummer { get; set; }
+        public string Epost { get; set; }
+        public string Adress { get; set; }
+        public string Kön { get; set; }
+
     }
 }
