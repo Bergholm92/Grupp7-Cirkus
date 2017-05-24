@@ -12,18 +12,18 @@ namespace Grupp18_v2
         public string Efternamn { get; set; }
         public string Adress { get; set; }
         public string Epost { get; set; }
-        public int Telefon { get; set; }
-        public int Mobiltelefon { get; set; }
+        public string Telefon { get; set; }
+        public string Mobiltelefon { get; set; }
         public bool Fotograferas { get; set; }
         public string Kön { get; set; }
         public int Medlemstyp_id { get; set; }
         public string Personnummer { get; set; }
-        public int Malsman_id { get; set; }
+        
 
-        public string ShowMembers { get { return Förnamn + " " + Efternamn + " " + Personnummer; } }
+        public string ShowMembers { get { return Förnamn + " " + Efternamn + " " ; } }
 
 
-        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, int telefon,bool fotograferas, string kön, int medlems_typ, string pnummer)
+        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, string telefon, string mobiltelefon, bool fotograferas, string kön, int medlems_typ, string pnummer)
         {
             Medlems_id = id;
             Förnamn = fnamn;
@@ -31,11 +31,10 @@ namespace Grupp18_v2
             Adress = adrss;
             Epost = epost;
             Telefon = telefon;
-            //Mobiltelefon = mobiltelefon;  Problem med hur man löser när denna faktiskt är null
+            Mobiltelefon = mobiltelefon;
             Fotograferas = fotograferas;
             Kön = kön;
             Medlemstyp_id = medlems_typ;
-            //Malsman_id = malsman_id;    Problem med hur man löser när denna faktiskt är null
             Personnummer = pnummer; 
         }
 
