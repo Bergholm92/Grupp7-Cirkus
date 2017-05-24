@@ -17,13 +17,14 @@ namespace Grupp18_v2
         NpgsqlConnection conn = new NpgsqlConnection("Server=webblabb.miun.se;Port=5432;User Id=db_g7;Password=cirkus88;Database=db_g7;SSL Mode = Require;");
         NpgsqlCommand cmd = new NpgsqlCommand();
         NpgsqlDataReader dr;
-        
+      
         public Form1()
         {
             InitializeComponent();
+            
         }
-        public void OpenAndGetData()
-        {
+        //private void OpenAndGetData()
+        //{
         //    try
         //    {
         //        conn.Open();
@@ -49,8 +50,14 @@ namespace Grupp18_v2
 
         //    }
 
+        //}
+
+
+        private void btnAdmin_Click(object sender, EventArgs e)
+        {
+            var AdminForm = new AdminForm();
+            AdminForm.Show();
+
         }
-
-
     }
 }

@@ -52,6 +52,7 @@
             this.btnAdmin.TabIndex = 1;
             this.btnAdmin.Text = "Administratör";
             this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnLedare
             // 
