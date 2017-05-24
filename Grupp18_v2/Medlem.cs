@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Npgsql;
 namespace Grupp18_v2
 {
     public class Medlem
@@ -17,13 +18,13 @@ namespace Grupp18_v2
         public bool Fotograferas { get; set; }
         public string Kön { get; set; }
         public int Medlemstyp_id { get; set; }
-        public string Personnummer { get; set; }
+        public DateTime Personnummer { get; set; }
         
 
         public string ShowMembers { get { return Förnamn + " " + Efternamn + " " ; } }
 
 
-        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, string telefon, string mobiltelefon, bool fotograferas, string kön, int medlems_typ, string pnummer)
+        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, string telefon, string mobiltelefon, bool fotograferas, string kön, int medlems_typ, DateTime pnummer)
         {
             Medlems_id = id;
             Förnamn = fnamn;
@@ -41,7 +42,7 @@ namespace Grupp18_v2
         public void AddMedlem()
         {
             
-           
+
         }
     }
 }
