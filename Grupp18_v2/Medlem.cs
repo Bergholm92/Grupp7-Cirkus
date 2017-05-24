@@ -17,13 +17,13 @@ namespace Grupp18_v2
         public bool Fotograferas { get; set; }
         public string Kön { get; set; }
         public int Medlemstyp_id { get; set; }
-        public DateTime Personnummer { get; set; }
+        public string Personnummer { get; set; }
         public int Malsman_id { get; set; }
 
         public string ShowMembers { get { return Förnamn + " " + Efternamn + " " + Personnummer; } }
 
 
-        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, int telefon,bool fotograferas, string kön, int medlems_typ, DateTime pnummer)
+        public Medlem(int id, string fnamn, string enamn, string adrss, string epost, int telefon,bool fotograferas, string kön, int medlems_typ, string pnummer)
         {
             Medlems_id = id;
             Förnamn = fnamn;
