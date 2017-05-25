@@ -59,5 +59,11 @@ namespace Grupp18_v2
             AdminForm.Show();
 
         }
+
+        private void btnLedare_Click(object sender, EventArgs e)
+        {
+            var LedareForm = new LedareForm();
+            LedareForm.Show();
+        }
     }
 }

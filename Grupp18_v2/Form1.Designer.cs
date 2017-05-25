@@ -63,6 +63,7 @@
             this.btnLedare.TabIndex = 2;
             this.btnLedare.Text = "Ledare";
             this.btnLedare.UseVisualStyleBackColor = true;
+            this.btnLedare.Click += new System.EventHandler(this.btnLedare_Click);
             // 
             // Form1
             // 

@@ -24,6 +24,21 @@ namespace Grupp18_v2
         public string ShowMembers { get { return Förnamn + " " + Efternamn + " " ; } }
 
 
+        public Medlem(string fnamn, string enamn, string adrss, string epost, string telefon, string mobiltelefon, bool fotograferas, string kön, int medlems_typ, DateTime pnummer)
+        {
+       
+            Förnamn = fnamn;
+            Efternamn = enamn;
+            Adress = adrss;
+            Epost = epost;
+            Telefon = telefon;
+            Mobiltelefon = mobiltelefon;
+            Fotograferas = fotograferas;
+            Kön = kön;
+            Medlemstyp_id = medlems_typ;
+            Personnummer = pnummer; 
+        }
+
         public Medlem(int id, string fnamn, string enamn, string adrss, string epost, string telefon, string mobiltelefon, bool fotograferas, string kön, int medlems_typ, DateTime pnummer)
         {
             Medlems_id = id;
@@ -36,8 +51,12 @@ namespace Grupp18_v2
             Fotograferas = fotograferas;
             Kön = kön;
             Medlemstyp_id = medlems_typ;
-            Personnummer = pnummer; 
+            Personnummer = pnummer;
         }
+
+
+
+
 
         public void AddMedlem()
         {

@@ -23,7 +23,7 @@ namespace Grupp18_v2
             InitializeComponent();
             UpdateAll();
         }
-        private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
+        public List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Grupp18_v2
                 while (dr.Read())
                 {
 
-                    medlemslist.Add(new Medlem(dr.GetInt32(dr.GetOrdinal("medlems_id")), dr["förnamn"].ToString(), dr["efternamn"].ToString(), dr["adress"].ToString(), dr["epost"].ToString(), dr["telefon"].ToString(), dr["mobiltelefon"].ToString(), dr.GetBoolean(dr.GetOrdinal("fotograferas")), dr["kön"].ToString(), dr.GetInt32(dr.GetOrdinal("medlemstyp_id")),  dr.GetDateTime(dr.GetOrdinal("personnummer"))));
+                    medlemslist.Add(new Medlem(dr.GetInt32(dr.GetOrdinal("medlems_id")), dr["förnamn"].ToString(), dr["efternamn"].ToString(), dr["adress"].ToString(), dr["epost"].ToString(), dr["telefon"].ToString(), dr["mobiltelefon"].ToString(), dr.GetBoolean(dr.GetOrdinal("fotograferas")), dr["kön"].ToString(), dr.GetInt32(dr.GetOrdinal("medlemstyp_id")), dr.GetDateTime(dr.GetOrdinal("personnummer"))));
                 }
                 return medlemmar;
             }
@@ -71,12 +71,8 @@ namespace Grupp18_v2
                 lbxMedlem.Items.Add(m);
             }
             lbxMedlem.DisplayMember = "ShowMembers";
-            int count = 0;
-            foreach (Medlem m in medlemslist)
-            {
-                count++;
-            }
-            textBox10.Text = Convert.ToString( count + 1);
+
+
         }
 
 
@@ -126,7 +122,22 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@telefon", telefon);
                 cmd.Parameters.AddWithValue("@personnummer", personnummer);
                 cmd.Parameters.AddWithValue("@id", medlems_id);
-                cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
+
+                if (comboBox1.SelectedItem == "Medlem")
+                {
+                    medlemstyp_id = 1;
+                    cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
+                }
+                else if (comboBox1.SelectedItem == "Prova-På")
+                {
+                    medlemstyp_id = 2;
+                    cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
+                }
+                else if (comboBox1.SelectedItem == "Cirkusvän")
+                {
+                    medlemstyp_id = 3;
+                    cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
+                }
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Användaren har uppdateras");
             }
@@ -145,7 +156,7 @@ namespace Grupp18_v2
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
+
             ListBox L = sender as ListBox;
             if (L.SelectedIndex != -1)
             {
@@ -160,12 +171,72 @@ namespace Grupp18_v2
                 checkBox1.Checked = M.Fotograferas;
                 textBox8.Text = M.Kön;
                 textBox9.Text = Convert.ToString(M.Personnummer);
-                textBox10.Text = Convert.ToString(M.Medlems_id); ;
+                textBox10.Text = Convert.ToString(M.Medlems_id);
+
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
+                if (textBox11.Text == "1")
+                {
+                    comboBox1.SelectedItem = "Medlem";
+
+                }
+                else if (textBox11.Text == "2")
+                {
+                    comboBox1.SelectedItem = "Prova-På";
+
+                }
+                else if (textBox11.Text == "3")
+                {
+                    comboBox1.SelectedItem = "Cirkusvän";
+
+                }
 
 
 
             }
+        }
+
+        private Medlem TaBortMedlem(Medlem valdMedlem)
+        {
+            try
+            {
+                foreach (Medlem M in medlemslist)
+                {
+                    Medlem N = (Medlem)lbxMedlem.SelectedItem;
+                    if (M == N)
+                    {
+                        medlemslist.Remove(N);
+                        TaBortMedlem(N);
+                        conn.Open();
+                        cmd = new NpgsqlCommand("DELETE from ingar where medlems_id= @id; DELETE from medlemsansvar where medlems_id = @id; DELETE from leder where medlems_id = @id; DELETE from narvaro where medlems_id = @id; DELETE from medlem where medlems_id = @id;", conn);
+                        cmd.Parameters.AddWithValue("@id", N.Medlems_id);
+                        dr = cmd.ExecuteReader();
+
+                        lbxMedlem.Items.Remove(N);
+                        lbxMedlem.Refresh();
+                        break;
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                while (dr.Read())
+                {
+
+                }
+                return valdMedlem;
+            }
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
@@ -182,7 +253,7 @@ namespace Grupp18_v2
 
             try
             {
-                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(checkBox1.Checked), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text), Convert.ToInt32(textBox10.Text) );
+                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(checkBox1.Checked), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text));
 
             }
             catch (NpgsqlException dx)
@@ -193,21 +264,16 @@ namespace Grupp18_v2
             UpdateAll();
         }
 
-        private Medlem AddMedlem_2(string fornamn, string efternamn, string adress, string epost, bool fotograferas, string kön, string mobiltelefon, string telefon, int medlemstyp, DateTime personnr, int id)
+        private Medlem AddMedlem_2(string fornamn, string efternamn, string adress, string epost, bool fotograferas, string kön, string mobiltelefon, string telefon, int medlemstyp, DateTime personnr)
         {
             fotograferas = true;
-            int count=0;
+
             try
             {
                 conn.Open();
-                cmd = new NpgsqlCommand("INSERT INTO medlem (medlems_id, förnamn, efternamn, adress, epost, fotograferas, kön, medlemstyp_id, mobiltelefon, telefon, personnummer ) VALUES(@medlems_id, @fornamn, @efternamn, @adress, @epost, @fotograferas, @kön, @typid, @mobiltelefon, @telefon, @personnr)", conn);
+                cmd = new NpgsqlCommand("INSERT INTO medlem ( förnamn, efternamn, adress, epost, fotograferas, kön, medlemstyp_id, mobiltelefon, telefon, personnummer ) VALUES( @fornamn, @efternamn, @adress, @epost, @fotograferas, @kön, @typid, @mobiltelefon, @telefon, @personnr)", conn);
 
-                foreach (Medlem m in medlemslist)
-                {
-                    count++;
-                }
-                id = count + 1;
-                cmd.Parameters.AddWithValue("@medlems_id", id);
+
                 cmd.Parameters.AddWithValue("@fornamn", fornamn);
                 cmd.Parameters.AddWithValue("@efternamn", efternamn);
                 cmd.Parameters.AddWithValue("@adress", adress);
@@ -223,7 +289,23 @@ namespace Grupp18_v2
                 }
 
                 cmd.Parameters.AddWithValue("@kön", kön);
-                cmd.Parameters.AddWithValue("@typid", medlemstyp);
+                if (comboBox1.SelectedItem == "Medlem")
+                {
+                    medlemstyp = 1;
+                    cmd.Parameters.AddWithValue("@typid", medlemstyp);
+                }
+                else if (comboBox1.SelectedItem == "Prova-På")
+                {
+                    medlemstyp = 2;
+                    cmd.Parameters.AddWithValue("@typid", medlemstyp);
+                }
+                else if (comboBox1.SelectedItem == "Cirkusvän")
+                {
+                    medlemstyp = 3;
+                    cmd.Parameters.AddWithValue("@typid", medlemstyp);
+                }
+
+
                 cmd.Parameters.AddWithValue("mobiltelefon", mobiltelefon);
                 cmd.Parameters.AddWithValue("@telefon", telefon);
                 cmd.Parameters.AddWithValue("@personnr", personnr);
@@ -232,7 +314,7 @@ namespace Grupp18_v2
 
                 //OBS ID Läggs inte till i INSERT statement.
                 //
-                return new Medlem(id, fornamn, efternamn, adress, epost, telefon, mobiltelefon, fotograferas, kön, medlemstyp, personnr);
+                return new Medlem(fornamn, efternamn, adress, epost, telefon, mobiltelefon, fotograferas, kön, medlemstyp, personnr);
 
             }
             catch (NpgsqlException ex)
@@ -270,6 +352,32 @@ namespace Grupp18_v2
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            Medlem N = (Medlem)lbxMedlem.SelectedItem;
+            TaBortMedlem(N);
+            UpdateAll();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == "Medlem")
+            {
+                textBox11.Text = "1";
+
+            }
+
+            else if (comboBox1.SelectedItem == "Prova-På")
+            {
+
+                textBox11.Text = "2";
+
+            }
+            else if (comboBox1.SelectedItem == "Cirkusvän")
+            {
+
+                textBox11.Text = "3";
+            }
+     
 
         }
     }
