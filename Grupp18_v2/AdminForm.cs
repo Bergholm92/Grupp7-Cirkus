@@ -53,6 +53,16 @@ namespace Grupp18_v2
 
         private void UpdateAll()
         {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox8.Clear();
+            textBox9.Clear();
+            textBox10.Clear();
+            textBox11.Clear();
             lbxMedlem.Items.Clear();
             medlemslist.Clear();
             GetMedlemmar(medlemslist);
@@ -61,7 +71,12 @@ namespace Grupp18_v2
                 lbxMedlem.Items.Add(m);
             }
             lbxMedlem.DisplayMember = "ShowMembers";
-
+            int count = 0;
+            foreach (Medlem m in medlemslist)
+            {
+                count++;
+            }
+            textBox10.Text = Convert.ToString( count + 1);
         }
 
 
@@ -130,6 +145,7 @@ namespace Grupp18_v2
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
         {
+        
             ListBox L = sender as ListBox;
             if (L.SelectedIndex != -1)
             {
@@ -141,10 +157,10 @@ namespace Grupp18_v2
                 textBox4.Text = M.Epost;
                 textBox5.Text = Convert.ToString(M.Telefon);
                 textBox6.Text = Convert.ToString(M.Mobiltelefon);
-                textBox7.Text = Convert.ToString(M.Fotograferas);
+                checkBox1.Checked = M.Fotograferas;
                 textBox8.Text = M.Kön;
                 textBox9.Text = Convert.ToString(M.Personnummer);
-                textBox10.Text = Convert.ToString(M.Medlems_id);
+                textBox10.Text = Convert.ToString(M.Medlems_id); ;
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
 
 
@@ -166,7 +182,7 @@ namespace Grupp18_v2
 
             try
             {
-                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(textBox7.Text), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text), Convert.ToInt32(textBox10.Text) );
+                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(checkBox1.Checked), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text), Convert.ToInt32(textBox10.Text) );
 
             }
             catch (NpgsqlException dx)
@@ -179,18 +195,33 @@ namespace Grupp18_v2
 
         private Medlem AddMedlem_2(string fornamn, string efternamn, string adress, string epost, bool fotograferas, string kön, string mobiltelefon, string telefon, int medlemstyp, DateTime personnr, int id)
         {
-
+            fotograferas = true;
+            int count=0;
             try
             {
                 conn.Open();
                 cmd = new NpgsqlCommand("INSERT INTO medlem (medlems_id, förnamn, efternamn, adress, epost, fotograferas, kön, medlemstyp_id, mobiltelefon, telefon, personnummer ) VALUES(@medlems_id, @fornamn, @efternamn, @adress, @epost, @fotograferas, @kön, @typid, @mobiltelefon, @telefon, @personnr)", conn);
 
+                foreach (Medlem m in medlemslist)
+                {
+                    count++;
+                }
+                id = count + 1;
                 cmd.Parameters.AddWithValue("@medlems_id", id);
                 cmd.Parameters.AddWithValue("@fornamn", fornamn);
                 cmd.Parameters.AddWithValue("@efternamn", efternamn);
                 cmd.Parameters.AddWithValue("@adress", adress);
                 cmd.Parameters.AddWithValue("@epost", epost);
-                cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                if (checkBox1.Checked)
+                {
+                    cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                }
+                else
+                {
+                    fotograferas = false;
+                    cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                }
+
                 cmd.Parameters.AddWithValue("@kön", kön);
                 cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 cmd.Parameters.AddWithValue("mobiltelefon", mobiltelefon);
@@ -223,6 +254,23 @@ namespace Grupp18_v2
         {
             ChangeMedlem();
             UpdateAll();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                checkBox1.Text = "Ja";
+            }
+            else
+            {
+                checkBox1.Text = "Nej";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -46,7 +46,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -55,6 +54,7 @@
             this.lblMId = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbxMedlem
@@ -208,13 +208,6 @@
             this.textBox6.Size = new System.Drawing.Size(100, 20);
             this.textBox6.TabIndex = 18;
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(175, 147);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(40, 20);
-            this.textBox7.TabIndex = 19;
-            // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(175, 191);
@@ -234,6 +227,7 @@
             this.textBox10.Location = new System.Drawing.Point(298, 105);
             this.textBox10.Margin = new System.Windows.Forms.Padding(2);
             this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(76, 20);
             this.textBox10.TabIndex = 22;
             // 
@@ -278,18 +272,30 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(221, 147);
+            this.checkBox1.Location = new System.Drawing.Point(175, 147);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.Size = new System.Drawing.Size(119, 17);
             this.checkBox1.TabIndex = 29;
-            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.Text = "Vill du fotograferas?";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(256, 261);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "Ta bort";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 422);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.lblMId);
@@ -298,7 +304,6 @@
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label11);
@@ -347,12 +352,12 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label lblMId;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button2;
     }
 }
