@@ -64,7 +64,61 @@ namespace Grupp18_v2
 
         }
 
+        public void ChangeMedlem()
+        {
+            string fnamn = textBox1.Text;
+            string enamn = textBox2.Text;
+            string adress = textBox3.Text;
+            string epost = textBox4.Text;
+            bool fotograferas = true;
+            string kön = textBox8.Text;
+            string mobiltelefon = textBox6.Text;
+            string telefon = textBox5.Text;
+            DateTime personnummer = Convert.ToDateTime( textBox9.Text);
+            int medlems_id = Convert.ToInt32( textBox10.Text);
+            int medlemstyp_id = Convert.ToInt32(textBox11.Text);
 
+            try
+            {
+                
+                conn.Open();
+                string query = "UPDATE medlem SET (förnamn, efternamn,adress, epost,fotograferas, kön, mobiltelefon, telefon,personnummer, medlemstyp_id) = (@förnamn, @efternamn, @adress, @epost,@fotograferas, @kön, @mobiltelefon, @telefon, @personnummer,@medlemstyp) WHERE medlems_id=@id";
+                cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@förnamn", fnamn);
+                cmd.Parameters.AddWithValue("@efternamn", enamn);
+                cmd.Parameters.AddWithValue("@adress", adress);
+                cmd.Parameters.AddWithValue("@epost", epost);
+                
+                if (checkBox1.Checked)
+                {
+                    cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                }
+                else
+                {
+                    fotograferas = false;
+                    cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                }
+                    cmd.Parameters.AddWithValue("@kön", kön);
+                // cmd.Parameters.AddWithValue("@medlemstyp_id", medlemstyp_id);
+                cmd.Parameters.AddWithValue("@mobiltelefon", mobiltelefon);
+                cmd.Parameters.AddWithValue("@telefon", telefon);
+                cmd.Parameters.AddWithValue("@personnummer", personnummer);
+                cmd.Parameters.AddWithValue("@id", medlems_id);
+                cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Användaren har uppdateras");
+            }
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+            }
+            finally
+            {
+                conn.Close();
+            }
+   
+        }
         
         private void AdminForm_Load(object sender, EventArgs e)
         {
@@ -73,7 +127,7 @@ namespace Grupp18_v2
 
         private void button1_Click(object sender, EventArgs e)
         {
-        
+         
         }
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,10 +146,33 @@ namespace Grupp18_v2
                 textBox7.Text = Convert.ToString(M.Fotograferas);
                 textBox8.Text = M.Kön;
                 textBox9.Text = Convert.ToString(M.Personnummer);
-                
+                textBox10.Text = Convert.ToString(M.Medlems_id);
+                textBox11.Text = Convert.ToString(M.Medlemstyp_id);
+                checkBox1.Checked = Convert.ToBoolean(M.Fotograferas);
+               
 
 
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ChangeMedlem();
+            UpdateAll();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                checkBox1.Text = "Ja";
+            }
+            else
+            {
+                checkBox1.Text = "Nej";
+            }
+        }
+
+   
     }
 }

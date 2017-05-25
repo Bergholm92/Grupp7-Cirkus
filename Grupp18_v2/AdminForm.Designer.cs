@@ -46,9 +46,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbxMedlem
@@ -202,14 +208,6 @@
             this.textBox6.Size = new System.Drawing.Size(100, 20);
             this.textBox6.TabIndex = 18;
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(175, 147);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 19;
-            // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(175, 191);
@@ -224,11 +222,78 @@
             this.textBox9.Size = new System.Drawing.Size(63, 20);
             this.textBox9.TabIndex = 21;
             // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(298, 106);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(74, 20);
+            this.textBox10.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(295, 90);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "KundID";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(123, 261);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 25;
+            this.button3.Text = "Ändra";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(221, 149);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Vill du fotas?";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(175, 147);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(40, 20);
+            this.textBox7.TabIndex = 19;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(298, 191);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(74, 20);
+            this.textBox11.TabIndex = 27;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(295, 175);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(63, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Medlemstyp";
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 422);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.textBox11);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
@@ -280,6 +345,12 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label12;
     }
 }
