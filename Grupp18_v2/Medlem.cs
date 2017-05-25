@@ -55,7 +55,10 @@ namespace Grupp18_v2
         }
 
 
-
+        public Medlem(int id)
+        {
+            Medlems_id = id;
+        }
 
 
         public void AddMedlem()

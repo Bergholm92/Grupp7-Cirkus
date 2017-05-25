@@ -75,6 +75,7 @@
     <Compile Include="Malsman.cs" />
     <Compile Include="Medlem.cs" />
     <Compile Include="Medlemstyp.cs" />
+    <Compile Include="Narvaro.cs" />
     <Compile Include="Plats.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
