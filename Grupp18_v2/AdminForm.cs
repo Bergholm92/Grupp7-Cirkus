@@ -23,50 +23,6 @@ namespace Grupp18_v2
             InitializeComponent();
             UpdateAll();
         }
-        private Medlem TaBortMedlem(Medlem valdMedlem)
-        {
-            try
-            {
-                foreach (Medlem M in medlemslist)
-                {
-                    Medlem N = (Medlem)lbxMedlem.SelectedItem;
-                    if (M == N)
-                    {
-                        medlemslist.Remove(N);
-                        TaBortMedlem(N);
-                        conn.Open();
-                        cmd = new NpgsqlCommand("DELETE from ingar where medlems_id= @id; DELETE from medlemsansvar where medlems_id = @id; DELETE from leder where medlems_id = @id; DELETE from narvaro where medlems_id = @id; DELETE from medlem where medlems_id = @id;", conn);
-                        cmd.Parameters.AddWithValue("@id", N.Medlems_id);
-                        dr = cmd.ExecuteReader();
-                        
-                        lbxMedlem.Items.Remove(N);
-                        lbxMedlem.Refresh();
-                        break;
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-                while (dr.Read())
-                {
-
-                }
-                return valdMedlem;
-            }
-            catch(NpgsqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            
-        }
-
         private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
             try
@@ -140,13 +96,6 @@ namespace Grupp18_v2
 
 
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Medlem N = (Medlem)lbxMedlem.SelectedItem;
-            TaBortMedlem(N);
-            UpdateAll();
         }
     }
 }
