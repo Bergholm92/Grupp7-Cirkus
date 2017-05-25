@@ -17,7 +17,7 @@ namespace Grupp18_v2
         NpgsqlCommand cmd = new NpgsqlCommand();
         NpgsqlDataReader dr;
         List<Medlem> medlemslist = new List<Medlem>();
-       
+
         public AdminForm()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace Grupp18_v2
                 while (dr.Read())
                 {
 
-                    medlemslist.Add(new Medlem(dr.GetInt32(dr.GetOrdinal("medlems_id")), dr["förnamn"].ToString(), dr["efternamn"].ToString(), dr["adress"].ToString(), dr["epost"].ToString(), dr["telefon"].ToString(), dr["mobiltelefon"].ToString(), dr.GetBoolean(dr.GetOrdinal("fotograferas")), dr["kön"].ToString(), dr.GetInt32(dr.GetOrdinal("medlemstyp_id")), dr["personnummer"].ToString()));
+                    medlemslist.Add(new Medlem(dr.GetInt32(dr.GetOrdinal("medlems_id")), dr["förnamn"].ToString(), dr["efternamn"].ToString(), dr["adress"].ToString(), dr["epost"].ToString(), dr["telefon"].ToString(), dr["mobiltelefon"].ToString(), dr.GetBoolean(dr.GetOrdinal("fotograferas")), dr["kön"].ToString(), dr.GetInt32(dr.GetOrdinal("medlemstyp_id")),  dr.GetDateTime(dr.GetOrdinal("personnummer"))));
                 }
                 return medlemmar;
             }
@@ -65,16 +65,13 @@ namespace Grupp18_v2
         }
 
 
-        
+
         private void AdminForm_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-        
-        }
+
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -92,10 +89,77 @@ namespace Grupp18_v2
                 textBox7.Text = Convert.ToString(M.Fotograferas);
                 textBox8.Text = M.Kön;
                 textBox9.Text = Convert.ToString(M.Personnummer);
-                
+
 
 
             }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            //if (txtbxMember.Text != "" & txtbxNamn.Text != "" & txtbxTele.Text != "")
+            //{
+            //    AddMedlem(Convert.ToInt32(txtbxMember.Text), txtbxNamn.Text, txtbxTele.Text);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Du måste mata in uppgifter i textboxarna.");
+            //}
+
+
+            try
+            {
+                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(textBox7.Text), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text), Convert.ToInt32(textBox10.Text) );
+
+            }
+            catch (NpgsqlException dx)
+            {
+
+                MessageBox.Show(dx.Message);
+            }
+
+        }
+
+        private Medlem AddMedlem_2(string fornamn, string efternamn, string adress, string epost, bool fotograferas, string kön, string mobiltelefon, string telefon, int medlemstyp, DateTime personnr, int id)
+        {
+
+            try
+            {
+                conn.Open();
+                cmd = new NpgsqlCommand("INSERT INTO medlem (medlems_id, förnamn, efternamn, adress, epost, fotograferas, kön, medlemstyp_id, mobiltelefon, telefon, personnummer ) VALUES(@medlems_id, @fornamn, @efternamn, @adress, @epost, @fotograferas, @kön, @typid, @mobiltelefon, @telefon, @personnr)", conn);
+
+                cmd.Parameters.AddWithValue("@medlems_id", id);
+                cmd.Parameters.AddWithValue("@fornamn", fornamn);
+                cmd.Parameters.AddWithValue("@efternamn", efternamn);
+                cmd.Parameters.AddWithValue("@adress", adress);
+                cmd.Parameters.AddWithValue("@epost", epost);
+                cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
+                cmd.Parameters.AddWithValue("@kön", kön);
+                cmd.Parameters.AddWithValue("@typid", medlemstyp);
+                cmd.Parameters.AddWithValue("mobiltelefon", mobiltelefon);
+                cmd.Parameters.AddWithValue("@telefon", telefon);
+                cmd.Parameters.AddWithValue("@personnr", personnr);
+
+                cmd.ExecuteNonQuery();
+
+                //OBS ID Läggs inte till i INSERT statement.
+                //
+                return new Medlem(id, fornamn, efternamn, adress, epost, telefon, mobiltelefon, fotograferas, kön, medlemstyp, personnr);
+
+            }
+            catch (NpgsqlException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+
         }
     }
 }
