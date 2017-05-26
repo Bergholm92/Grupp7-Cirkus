@@ -33,6 +33,10 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox2
@@ -57,9 +61,9 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(273, 38);
+            this.listBox1.Location = new System.Drawing.Point(12, 38);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(185, 238);
+            this.listBox1.Size = new System.Drawing.Size(446, 238);
             this.listBox1.TabIndex = 3;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -81,11 +85,56 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Medlemmar";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Akrobatik",
+            "Jonglering",
+            "Klot"});
+            this.comboBox1.Location = new System.Drawing.Point(495, 38);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.Location = new System.Drawing.Point(12, 321);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(135, 147);
+            this.listBox3.TabIndex = 7;
+            this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 305);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Närvarolista";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 475);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(121, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Ta bort från aktivitet";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // LedareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 499);
+            this.ClientSize = new System.Drawing.Size(898, 665);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
@@ -104,5 +153,9 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
     }
 }
