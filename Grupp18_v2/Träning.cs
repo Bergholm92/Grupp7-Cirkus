@@ -26,6 +26,7 @@ namespace Grupp18_v2
             Träningsgrupp = träningsgrupp;
             Plats = plats;
         }
+
         
    
     }

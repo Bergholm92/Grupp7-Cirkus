@@ -65,6 +65,7 @@ namespace Grupp18_v2
             textBox11.Clear();
             lbxMedlem.Items.Clear();
             medlemslist.Clear();
+            comboBox1.SelectedIndex = -1;
             GetMedlemmar(medlemslist);
             foreach (Medlem m in medlemslist)
             {
@@ -379,6 +380,11 @@ namespace Grupp18_v2
             }
      
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateAll();
         }
     }
 }

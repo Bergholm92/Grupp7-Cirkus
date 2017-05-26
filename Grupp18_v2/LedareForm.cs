@@ -139,7 +139,11 @@ namespace Grupp18_v2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+                
                 N.Addnarvaro(träning, medlems_id);
+          
+         
         }
 
         private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
