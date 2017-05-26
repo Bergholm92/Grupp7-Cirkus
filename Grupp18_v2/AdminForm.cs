@@ -14,7 +14,6 @@ namespace Grupp18_v2
     public partial class AdminForm : Form
     {
         NpgsqlConnection conn = new NpgsqlConnection("Server=webblabb.miun.se;Port=5432;User Id=db_g7;Password=cirkus88;Database=db_g7;SSL Mode = Require;");
-        NpgsqlCommand cmd = new NpgsqlCommand();
         NpgsqlDataReader dr;
         List<Medlem> medlemslist = new List<Medlem>();
 
