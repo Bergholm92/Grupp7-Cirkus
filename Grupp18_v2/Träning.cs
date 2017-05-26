@@ -15,7 +15,7 @@ namespace Grupp18_v2
         public string Beskrivning { get; set; }
         public int Träningsgrupp { get; set; }
         public int Plats { get; set; }
-        public string Showtraning { get { return Beskrivning + " "  + " "; } }
+        public string Showtraning { get { return Beskrivning + " "  + Datum +" "; } }
 
         public Träning(int tranings_id, DateTime datum, string beskrivning, int träningsgrupp, int plats)
         {

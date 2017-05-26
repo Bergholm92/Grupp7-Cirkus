@@ -21,10 +21,12 @@ namespace Grupp18_v2
         int medlems_id;
         int träning;
 
+
         public LedareForm()
         {
             InitializeComponent();
             UpdateAll();
+
         }
 
         private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
@@ -102,32 +104,32 @@ namespace Grupp18_v2
 
         }
 
-        public Narvaro Addnarvaro(int traning, int medlem)
-        {
-            conn.Open();
-            try
-            {
+        //public Narvaro Addnarvaro(int traning, int medlem)
+        //{
+        //    conn.Open();
+        //    try
+        //    {
                 
-                cmd = new NpgsqlCommand("INSERT INTO narvaro (tranings_id, medlems_id) VALUES (@tid, @mid)", conn);
+        //        cmd = new NpgsqlCommand("INSERT INTO narvaro (tranings_id, medlems_id) VALUES (@tid, @mid)", conn);
 
 
-                cmd.Parameters.AddWithValue("@tid", traning);
-                cmd.Parameters.AddWithValue("@mid", medlem);
-                cmd.ExecuteNonQuery();
-                return new Narvaro(traning, medlem);
+        //        cmd.Parameters.AddWithValue("@tid", traning);
+        //        cmd.Parameters.AddWithValue("@mid", medlem);
+        //        cmd.ExecuteNonQuery();
+        //        return new Narvaro(traning, medlem);
 
-            }
-            catch (NpgsqlException ex)
-            {
+        //    }
+        //    catch (NpgsqlException ex)
+        //    {
 
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+                
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -138,7 +140,8 @@ namespace Grupp18_v2
         {
             try
             {
-                Addnarvaro(träning, medlems_id);
+                Narvaro N = new Narvaro(träning, medlems_id);
+                N.Addnarvaro(träning, medlems_id);
             }
             catch (NpgsqlException dx)
             {
@@ -169,6 +172,7 @@ namespace Grupp18_v2
                 listBox1.SelectedIndex = C.SelectedIndex;
                 Träning T = (Träning)listBox1.SelectedItem;
                 träning = T.Tränings_id;
+                
 
             }
         }
