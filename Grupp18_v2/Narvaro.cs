@@ -15,11 +15,11 @@ namespace Grupp18_v2
         int Tranings_id;
         int Medlems_id;
 
-        public Narvaro(int tranings_id, int medlems_id)
-        {
-            Tranings_id = tranings_id;
-            Medlems_id = medlems_id;
-        }
+        //public Narvaro(int tranings_id, int medlems_id)
+        //{
+        //    Tranings_id = tranings_id;
+        //    Medlems_id = medlems_id;
+        //}
 
         public Narvaro Addnarvaro(int traning, int medlem)
         {
@@ -33,7 +33,7 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@tid", traning);
                 cmd.Parameters.AddWithValue("@mid", medlem);
                 cmd.ExecuteNonQuery();
-                return new Narvaro(traning, medlem);
+                return new Narvaro();
 
             }
             catch

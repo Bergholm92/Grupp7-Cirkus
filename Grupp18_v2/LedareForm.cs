@@ -18,6 +18,7 @@ namespace Grupp18_v2
         NpgsqlDataReader dr;
         List<Medlem> medlemslist = new List<Medlem>();
         List<Träning> träningslist = new List<Träning>();
+        Narvaro N = new Narvaro();
         int medlems_id;
         int träning;
 
@@ -138,17 +139,7 @@ namespace Grupp18_v2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Narvaro N = new Narvaro(träning, medlems_id);
                 N.Addnarvaro(träning, medlems_id);
-            }
-            catch (NpgsqlException dx)
-            {
-                MessageBox.Show(dx.Message);
-
-            }
-         
         }
 
         private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
