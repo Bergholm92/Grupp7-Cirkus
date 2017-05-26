@@ -13,7 +13,8 @@ namespace Grupp18_v2
 {
     public partial class AdminForm : Form
     {
-        NpgsqlConnection conn = new NpgsqlConnection("Server=webblabb.miun.se;Port=5432;User Id=db_g7;Password=cirkus88;Database=db_g7;SSL Mode = Require;");
+        //NpgsqlConnection conn = new NpgsqlConnection("Server=webblabb.miun.se;Port=5432;User Id=db_g7;Password=cirkus88;Database=db_g7;SSL Mode = Require;");
+        //NpgsqlCommand cmd = new NpgsqlCommand();
         NpgsqlDataReader dr;
         List<Medlem> medlemslist = new List<Medlem>();
 
@@ -22,14 +23,28 @@ namespace Grupp18_v2
             InitializeComponent();
             UpdateAll();
         }
+
+        public string ConOpen(string sql)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection("Server=webblabb.miun.se;Port=5432;User Id=db_g7;Password=cirkus88;Database=db_g7;SSL Mode = Require;");
+            NpgsqlCommand cmd = new NpgsqlCommand();
+            
+
+            conn.Open();
+            cmd = new NpgsqlCommand(sql, conn);
+            dr = cmd.ExecuteReader();
+
+            return sql;
+        }
         public List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
             try
             {
-                conn.Open();
-                cmd = new NpgsqlCommand("SELECT * FROM medlem ORDER BY efternamn ASC", conn);
-                dr = cmd.ExecuteReader();
+                //conn.Open();
+                //cmd = new NpgsqlCommand("SELECT * FROM medlem ORDER BY efternamn ASC", conn);
+                //dr = cmd.ExecuteReader();
 
+                ConOpen("SELECT * FROM medlem ORDER BY efternamn ASC");
 
 
                 while (dr.Read())
