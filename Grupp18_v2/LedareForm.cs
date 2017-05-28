@@ -28,7 +28,7 @@ namespace Grupp18_v2
             InitializeComponent();
             UpdateAll();
             
-            
+
 
         }
 
@@ -190,6 +190,33 @@ namespace Grupp18_v2
            
 
         }
+        private void UpdateAll2()
+        {
+            
+            listBox2.Items.Clear();
+            listBox3.Items.Clear();
+            medlemslist.Clear();
+            
+            Närvarolist.Clear();
+
+            GetMedlemmar(medlemslist);
+            GetTräningar(träningslist);
+            Getnarvaro(Närvarolist);
+            foreach (Medlem m in medlemslist)
+            {
+                listBox2.Items.Add(m);
+            }
+            listBox2.DisplayMember = "ShowMembers";
+
+   
+            foreach (Narvaro N in Närvarolist)
+            {
+                listBox3.Items.Add(N);
+            }
+            listBox3.DisplayMember = "Shownarvaro";
+
+
+        }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -201,7 +228,7 @@ namespace Grupp18_v2
             Narvaro N = new Narvaro(träning, medlems_id);
             N.Addnarvaro(träning, medlems_id);
             Getnarvaro(Närvarolist);
-            UpdateAll();
+            UpdateAll2();
             
 
         }
@@ -251,7 +278,7 @@ namespace Grupp18_v2
         {
             Narvaro N = new Narvaro(träning, medlems_id);
             N.Removenarvaro(träning, medlems_id);
-            UpdateAll();
+            UpdateAll2();
         }
 
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
