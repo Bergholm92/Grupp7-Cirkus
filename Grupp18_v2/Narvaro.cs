@@ -39,7 +39,7 @@ namespace Grupp18_v2
 
                 cmd = new NpgsqlCommand("INSERT INTO narvaro (tranings_id, medlems_id) SELECT @tid, @mid WHERE NOT EXISTS ( SELECT tranings_id FROM narvaro WHERE tranings_id = @tid AND medlems_id=@mid);", conn);
 
-
+                
                 cmd.Parameters.AddWithValue("@tid", traning);
                 cmd.Parameters.AddWithValue("@mid", medlem);
                 cmd.ExecuteNonQuery();
