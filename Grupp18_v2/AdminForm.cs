@@ -386,5 +386,16 @@ namespace Grupp18_v2
         {
             UpdateAll();
         }
+
+        private void btnTraning_Click(object sender, EventArgs e)
+        {
+            var Traningsgruppform = new TraningsgruppForm();
+            Traningsgruppform.Show();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
