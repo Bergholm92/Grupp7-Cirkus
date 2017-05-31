@@ -214,6 +214,7 @@
             this.lbxTgrupp.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbxTgrupp.Size = new System.Drawing.Size(121, 160);
             this.lbxTgrupp.TabIndex = 4;
+            this.lbxTgrupp.SelectedIndexChanged += new System.EventHandler(this.lbxTgrupp_SelectedIndexChanged);
             // 
             // label4
             // 
