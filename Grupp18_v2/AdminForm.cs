@@ -49,7 +49,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//Liknande Get-metod som finns hos ledare-formet.
 
         private void UpdateAll()
         {
@@ -65,7 +65,7 @@ namespace Grupp18_v2
             textBox11.Clear();
             lbxMedlem.Items.Clear();
             medlemslist.Clear();
-            comboBox1.SelectedIndex = -1;
+            cbxtyp.SelectedIndex = -1;
             GetMedlemmar(medlemslist);
             foreach (Medlem m in medlemslist)
             {
@@ -74,7 +74,7 @@ namespace Grupp18_v2
             lbxMedlem.DisplayMember = "ShowMembers";
 
 
-        }
+        }// En update-metod som uppdaterar allt. 
 
 
 
@@ -124,17 +124,17 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@personnummer", personnummer);
                 cmd.Parameters.AddWithValue("@id", medlems_id);
 
-                if (comboBox1.SelectedItem == "Medlem")
+                if (cbxtyp.SelectedItem == "Medlem")
                 {
                     medlemstyp_id = 1;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (comboBox1.SelectedItem == "Prova-På")
+                else if (cbxtyp.SelectedItem == "Prova-På")
                 {
                     medlemstyp_id = 2;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (comboBox1.SelectedItem == "Cirkusvän")
+                else if (cbxtyp.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp_id = 3;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
@@ -152,7 +152,7 @@ namespace Grupp18_v2
                 conn.Close();
             }
 
-        }
+        }//Metod som gör det möjligt att ändra en medlem. 
 
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,17 +177,17 @@ namespace Grupp18_v2
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
                 if (textBox11.Text == "1")
                 {
-                    comboBox1.SelectedItem = "Medlem";
+                    cbxtyp.SelectedItem = "Medlem";
 
                 }
                 else if (textBox11.Text == "2")
                 {
-                    comboBox1.SelectedItem = "Prova-På";
+                    cbxtyp.SelectedItem = "Prova-På";
 
                 }
                 else if (textBox11.Text == "3")
                 {
-                    comboBox1.SelectedItem = "Cirkusvän";
+                    cbxtyp.SelectedItem = "Cirkusvän";
 
                 }
 
@@ -238,18 +238,11 @@ namespace Grupp18_v2
                 conn.Close();
             }
 
-        }
+        }//Metod som gör det möjligt att ta bort en medlem från registret. 
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            //if (txtbxMember.Text != "" & txtbxNamn.Text != "" & txtbxTele.Text != "")
-            //{
-            //    AddMedlem(Convert.ToInt32(txtbxMember.Text), txtbxNamn.Text, txtbxTele.Text);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Du måste mata in uppgifter i textboxarna.");
-            //}
+     
 
 
             try
@@ -290,17 +283,17 @@ namespace Grupp18_v2
                 }
 
                 cmd.Parameters.AddWithValue("@kön", kön);
-                if (comboBox1.SelectedItem == "Medlem")
+                if (cbxtyp.SelectedItem == "Medlem")
                 {
                     medlemstyp = 1;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (comboBox1.SelectedItem == "Prova-På")
+                else if (cbxtyp.SelectedItem == "Prova-På")
                 {
                     medlemstyp = 2;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (comboBox1.SelectedItem == "Cirkusvän")
+                else if (cbxtyp.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp = 3;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
@@ -331,7 +324,7 @@ namespace Grupp18_v2
 
 
 
-        }
+        }//Metod som gör det möjligt att lägga till en medlem. 
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -361,19 +354,19 @@ namespace Grupp18_v2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem == "Medlem")
+            if (cbxtyp.SelectedItem == "Medlem")
             {
                 textBox11.Text = "1";
 
             }
 
-            else if (comboBox1.SelectedItem == "Prova-På")
+            else if (cbxtyp.SelectedItem == "Prova-På")
             {
 
                 textBox11.Text = "2";
 
             }
-            else if (comboBox1.SelectedItem == "Cirkusvän")
+            else if (cbxtyp.SelectedItem == "Cirkusvän")
             {
 
                 textBox11.Text = "3";
@@ -387,7 +380,7 @@ namespace Grupp18_v2
             UpdateAll();
         }
 
-        private void btnTraning_Click(object sender, EventArgs e)
+        private void btnTraning_Click(object sender, EventArgs e)//Knapp som tar oss till formen där man kan lägga till medlemmar till olika träningsgrupper. 
         {
             var Traningsgruppform = new TraningsgruppForm();
             Traningsgruppform.Show();
