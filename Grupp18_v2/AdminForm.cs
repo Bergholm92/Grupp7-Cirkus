@@ -53,19 +53,19 @@ namespace Grupp18_v2
 
         private void UpdateAll()
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox8.Clear();
-            textBox9.Clear();
-            textBox10.Clear();
-            textBox11.Clear();
+            tbxfnamn.Clear();
+            tbxenamn.Clear();
+            tbxadress.Clear();
+            tbxepost.Clear();
+            tbxtele.Clear();
+            tbxmobil.Clear();
+            tbxkön.Clear();
+            tbxprsnummer.Clear();
+            tbxmedlemsid.Clear();
+            tbxmedlemstyp.Clear();
             lbxMedlem.Items.Clear();
             medlemslist.Clear();
-            comboBox1.SelectedIndex = -1;
+            cbxmedlems.SelectedIndex = -1;
             GetMedlemmar(medlemslist);
             foreach (Medlem m in medlemslist)
             {
@@ -85,17 +85,17 @@ namespace Grupp18_v2
 
         public void ChangeMedlem()
         {
-            string fnamn = textBox1.Text;
-            string enamn = textBox2.Text;
-            string adress = textBox3.Text;
-            string epost = textBox4.Text;
+            string fnamn = tbxfnamn.Text;
+            string enamn = tbxenamn.Text;
+            string adress = tbxadress.Text;
+            string epost = tbxepost.Text;
             bool fotograferas = true;
-            string kön = textBox8.Text;
-            string mobiltelefon = textBox6.Text;
-            string telefon = textBox5.Text;
-            DateTime personnummer = Convert.ToDateTime(textBox9.Text);
-            int medlems_id = Convert.ToInt32(textBox10.Text);
-            int medlemstyp_id = Convert.ToInt32(textBox11.Text);
+            string kön = tbxkön.Text;
+            string mobiltelefon = tbxmobil.Text;
+            string telefon = tbxtele.Text;
+            DateTime personnummer = Convert.ToDateTime(tbxprsnummer.Text);
+            int medlems_id = Convert.ToInt32(tbxmedlemsid.Text);
+            int medlemstyp_id = Convert.ToInt32(tbxmedlemstyp.Text);
 
             try
             {
@@ -108,7 +108,7 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@adress", adress);
                 cmd.Parameters.AddWithValue("@epost", epost);
 
-                if (checkBox1.Checked)
+                if (cbxfoto.Checked)
                 {
                     cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
                 }
@@ -124,17 +124,17 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@personnummer", personnummer);
                 cmd.Parameters.AddWithValue("@id", medlems_id);
 
-                if (comboBox1.SelectedItem == "Medlem")
+                if (cbxmedlems.SelectedItem == "Medlem")
                 {
                     medlemstyp_id = 1;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (comboBox1.SelectedItem == "Prova-På")
+                else if (cbxmedlems.SelectedItem == "Prova-På")
                 {
                     medlemstyp_id = 2;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (comboBox1.SelectedItem == "Cirkusvän")
+                else if (cbxmedlems.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp_id = 3;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
@@ -163,31 +163,31 @@ namespace Grupp18_v2
             {
                 lbxMedlem.SelectedIndex = L.SelectedIndex;
                 Medlem M = (Medlem)lbxMedlem.SelectedItem;
-                textBox1.Text = M.Förnamn;
-                textBox2.Text = M.Efternamn;
-                textBox3.Text = M.Adress;
-                textBox4.Text = M.Epost;
-                textBox5.Text = Convert.ToString(M.Telefon);
-                textBox6.Text = Convert.ToString(M.Mobiltelefon);
-                checkBox1.Checked = M.Fotograferas;
-                textBox8.Text = M.Kön;
-                textBox9.Text = Convert.ToString(M.Personnummer);
-                textBox10.Text = Convert.ToString(M.Medlems_id);
+                tbxfnamn.Text = M.Förnamn;
+                tbxenamn.Text = M.Efternamn;
+                tbxadress.Text = M.Adress;
+                tbxepost.Text = M.Epost;
+                tbxtele.Text = Convert.ToString(M.Telefon);
+                tbxmobil.Text = Convert.ToString(M.Mobiltelefon);
+                cbxfoto.Checked = M.Fotograferas;
+                tbxkön.Text = M.Kön;
+                tbxprsnummer.Text = Convert.ToString(M.Personnummer);
+                tbxmedlemsid.Text = Convert.ToString(M.Medlems_id);
 
-                textBox11.Text = Convert.ToString(M.Medlemstyp_id);
-                if (textBox11.Text == "1")
+                tbxmedlemstyp.Text = Convert.ToString(M.Medlemstyp_id);
+                if (tbxmedlemstyp.Text == "1")
                 {
-                    comboBox1.SelectedItem = "Medlem";
-
-                }
-                else if (textBox11.Text == "2")
-                {
-                    comboBox1.SelectedItem = "Prova-På";
+                    cbxmedlems.SelectedItem = "Medlem";
 
                 }
-                else if (textBox11.Text == "3")
+                else if (tbxmedlemstyp.Text == "2")
                 {
-                    comboBox1.SelectedItem = "Cirkusvän";
+                    cbxmedlems.SelectedItem = "Prova-På";
+
+                }
+                else if (tbxmedlemstyp.Text == "3")
+                {
+                    cbxmedlems.SelectedItem = "Cirkusvän";
 
                 }
 
@@ -254,7 +254,7 @@ namespace Grupp18_v2
 
             try
             {
-                AddMedlem_2(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Convert.ToBoolean(checkBox1.Checked), textBox8.Text, textBox6.Text, textBox5.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(textBox9.Text));
+                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), tbxkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(tbxmedlemstyp.Text), Convert.ToDateTime(tbxprsnummer.Text));
 
             }
             catch (NpgsqlException dx)
@@ -279,7 +279,7 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@efternamn", efternamn);
                 cmd.Parameters.AddWithValue("@adress", adress);
                 cmd.Parameters.AddWithValue("@epost", epost);
-                if (checkBox1.Checked)
+                if (cbxfoto.Checked)
                 {
                     cmd.Parameters.AddWithValue("@fotograferas", fotograferas);
                 }
@@ -290,17 +290,17 @@ namespace Grupp18_v2
                 }
 
                 cmd.Parameters.AddWithValue("@kön", kön);
-                if (comboBox1.SelectedItem == "Medlem")
+                if (cbxmedlems.SelectedItem == "Medlem")
                 {
                     medlemstyp = 1;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (comboBox1.SelectedItem == "Prova-På")
+                else if (cbxmedlems.SelectedItem == "Prova-På")
                 {
                     medlemstyp = 2;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (comboBox1.SelectedItem == "Cirkusvän")
+                else if (cbxmedlems.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp = 3;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
@@ -341,13 +341,13 @@ namespace Grupp18_v2
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (cbxfoto.Checked)
             {
-                checkBox1.Text = "Ja";
+                cbxfoto.Text = "Ja";
             }
             else
             {
-                checkBox1.Text = "Nej";
+                cbxfoto.Text = "Nej";
             }
         }
 
@@ -361,22 +361,22 @@ namespace Grupp18_v2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem == "Medlem")
+            if (cbxmedlems.SelectedItem == "Medlem")
             {
-                textBox11.Text = "1";
+                tbxmedlemstyp.Text = "1";
 
             }
 
-            else if (comboBox1.SelectedItem == "Prova-På")
+            else if (cbxmedlems.SelectedItem == "Prova-På")
             {
 
-                textBox11.Text = "2";
+                tbxmedlemstyp.Text = "2";
 
             }
-            else if (comboBox1.SelectedItem == "Cirkusvän")
+            else if (cbxmedlems.SelectedItem == "Cirkusvän")
             {
 
-                textBox11.Text = "3";
+                tbxmedlemstyp.Text = "3";
             }
      
 

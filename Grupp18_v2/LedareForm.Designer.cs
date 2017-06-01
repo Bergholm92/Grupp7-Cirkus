@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.lbxmedlemmar = new System.Windows.Forms.ListBox();
+            this.btnnarvaro = new System.Windows.Forms.Button();
+            this.lbxtraningar = new System.Windows.Forms.ListBox();
+            this.lbltraningar = new System.Windows.Forms.Label();
+            this.lblmedlemmar = new System.Windows.Forms.Label();
+            this.lbxnarvaro = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btntabort = new System.Windows.Forms.Button();
             this.gbUtskrift = new System.Windows.Forms.GroupBox();
             this.btnTgrupp = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -45,113 +44,104 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lbxTgrupp = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txbdatum2 = new System.Windows.Forms.TextBox();
             this.btnUtskrift = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.tbxdatum1 = new System.Windows.Forms.TextBox();
             this.btnLedare = new System.Windows.Forms.Button();
+            this.cmbtgrupp = new System.Windows.Forms.ComboBox();
             this.gbUtskrift.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox2
+            // lbxmedlemmar
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(643, 38);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(194, 238);
-            this.listBox2.TabIndex = 1;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged_1);
+            this.lbxmedlemmar.FormattingEnabled = true;
+            this.lbxmedlemmar.Location = new System.Drawing.Point(643, 38);
+            this.lbxmedlemmar.Name = "lbxmedlemmar";
+            this.lbxmedlemmar.Size = new System.Drawing.Size(194, 238);
+            this.lbxmedlemmar.TabIndex = 1;
+            this.lbxmedlemmar.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged_1);
             // 
-            // button1
+            // btnnarvaro
             // 
-            this.button1.Location = new System.Drawing.Point(505, 130);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Närvaro";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnnarvaro.Location = new System.Drawing.Point(505, 130);
+            this.btnnarvaro.Name = "btnnarvaro";
+            this.btnnarvaro.Size = new System.Drawing.Size(75, 23);
+            this.btnnarvaro.TabIndex = 2;
+            this.btnnarvaro.Text = "Närvaro";
+            this.btnnarvaro.UseVisualStyleBackColor = true;
+            this.btnnarvaro.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listBox1
+            // lbxtraningar
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 38);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(446, 238);
-            this.listBox1.TabIndex = 3;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.lbxtraningar.FormattingEnabled = true;
+            this.lbxtraningar.Location = new System.Drawing.Point(12, 38);
+            this.lbxtraningar.Name = "lbxtraningar";
+            this.lbxtraningar.Size = new System.Drawing.Size(446, 238);
+            this.lbxtraningar.TabIndex = 3;
+            this.lbxtraningar.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // label1
+            // lbltraningar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(273, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Träningar";
+            this.lbltraningar.AutoSize = true;
+            this.lbltraningar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltraningar.Location = new System.Drawing.Point(12, 17);
+            this.lbltraningar.Name = "lbltraningar";
+            this.lbltraningar.Size = new System.Drawing.Size(69, 15);
+            this.lbltraningar.TabIndex = 4;
+            this.lbltraningar.Text = "Träningar";
             // 
-            // label2
+            // lblmedlemmar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(640, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Medlemmar";
+            this.lblmedlemmar.AutoSize = true;
+            this.lblmedlemmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblmedlemmar.Location = new System.Drawing.Point(640, 17);
+            this.lblmedlemmar.Name = "lblmedlemmar";
+            this.lblmedlemmar.Size = new System.Drawing.Size(84, 15);
+            this.lblmedlemmar.TabIndex = 5;
+            this.lblmedlemmar.Text = "Medlemmar";
             // 
-            // comboBox1
+            // lbxnarvaro
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Akrobatik",
-            "Jonglering",
-            "Klot"});
-            this.comboBox1.Location = new System.Drawing.Point(495, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(12, 321);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(135, 147);
-            this.listBox3.TabIndex = 7;
-            this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
+            this.lbxnarvaro.FormattingEnabled = true;
+            this.lbxnarvaro.Location = new System.Drawing.Point(12, 321);
+            this.lbxnarvaro.Name = "lbxnarvaro";
+            this.lbxnarvaro.Size = new System.Drawing.Size(135, 147);
+            this.lbxnarvaro.TabIndex = 7;
+            this.lbxnarvaro.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 305);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Närvarolista";
             // 
-            // button2
+            // btntabort
             // 
-            this.button2.Location = new System.Drawing.Point(15, 475);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Ta bort från aktivitet";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btntabort.Location = new System.Drawing.Point(15, 475);
+            this.btntabort.Name = "btntabort";
+            this.btntabort.Size = new System.Drawing.Size(121, 23);
+            this.btntabort.TabIndex = 9;
+            this.btntabort.Text = "Ta bort från aktivitet";
+            this.btntabort.UseVisualStyleBackColor = true;
+            this.btntabort.Click += new System.EventHandler(this.button2_Click);
             // 
             // gbUtskrift
             // 
             this.gbUtskrift.Controls.Add(this.btnTgrupp);
+            this.gbUtskrift.Controls.Add(this.btnLedare);
             this.gbUtskrift.Controls.Add(this.label7);
             this.gbUtskrift.Controls.Add(this.lbxLedare);
             this.gbUtskrift.Controls.Add(this.label6);
             this.gbUtskrift.Controls.Add(this.label5);
             this.gbUtskrift.Controls.Add(this.lbxTgrupp);
             this.gbUtskrift.Controls.Add(this.label4);
-            this.gbUtskrift.Controls.Add(this.textBox2);
+            this.gbUtskrift.Controls.Add(this.txbdatum2);
             this.gbUtskrift.Controls.Add(this.btnUtskrift);
-            this.gbUtskrift.Controls.Add(this.textBox1);
+            this.gbUtskrift.Controls.Add(this.tbxdatum1);
             this.gbUtskrift.Location = new System.Drawing.Point(415, 334);
             this.gbUtskrift.Name = "gbUtskrift";
             this.gbUtskrift.Size = new System.Drawing.Size(580, 345);
@@ -161,7 +151,7 @@
             // 
             // btnTgrupp
             // 
-            this.btnTgrupp.Location = new System.Drawing.Point(405, 304);
+            this.btnTgrupp.Location = new System.Drawing.Point(15, 304);
             this.btnTgrupp.Name = "btnTgrupp";
             this.btnTgrupp.Size = new System.Drawing.Size(79, 35);
             this.btnTgrupp.TabIndex = 9;
@@ -172,6 +162,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(173, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 13);
@@ -190,6 +181,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(7, 114);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 13);
@@ -199,6 +191,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(7, 51);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -225,41 +218,36 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "mellan";
             // 
-            // textBox2
+            // txbdatum2
             // 
-            this.textBox2.Location = new System.Drawing.Point(176, 70);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(142, 20);
-            this.textBox2.TabIndex = 2;
+            this.txbdatum2.Location = new System.Drawing.Point(176, 70);
+            this.txbdatum2.Name = "txbdatum2";
+            this.txbdatum2.Size = new System.Drawing.Size(142, 20);
+            this.txbdatum2.TabIndex = 2;
+            this.txbdatum2.Text = "2017-01-05";
             // 
             // btnUtskrift
             // 
-            this.btnUtskrift.Location = new System.Drawing.Point(320, 304);
+            this.btnUtskrift.Location = new System.Drawing.Point(336, 62);
             this.btnUtskrift.Name = "btnUtskrift";
-            this.btnUtskrift.Size = new System.Drawing.Size(79, 35);
+            this.btnUtskrift.Size = new System.Drawing.Size(86, 35);
             this.btnUtskrift.TabIndex = 1;
             this.btnUtskrift.Text = "Skriv ut datumintervall";
             this.btnUtskrift.UseVisualStyleBackColor = true;
             this.btnUtskrift.Click += new System.EventHandler(this.btnUtskrift_Click);
             // 
-            // textBox1
+            // tbxdatum1
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.Location = new System.Drawing.Point(289, 373);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(120, 147);
-            this.listBox4.TabIndex = 11;
+            this.tbxdatum1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tbxdatum1.Location = new System.Drawing.Point(6, 70);
+            this.tbxdatum1.Name = "tbxdatum1";
+            this.tbxdatum1.Size = new System.Drawing.Size(121, 20);
+            this.tbxdatum1.TabIndex = 0;
+            this.tbxdatum1.Text = "2015-01-01";
             // 
             // btnLedare
             // 
-            this.btnLedare.Location = new System.Drawing.Point(905, 638);
+            this.btnLedare.Location = new System.Drawing.Point(205, 299);
             this.btnLedare.Name = "btnLedare";
             this.btnLedare.Size = new System.Drawing.Size(79, 35);
             this.btnLedare.TabIndex = 10;
@@ -267,23 +255,30 @@
             this.btnLedare.UseVisualStyleBackColor = true;
             this.btnLedare.Click += new System.EventHandler(this.btnLedare_Click);
             // 
+            // cmbtgrupp
+            // 
+            this.cmbtgrupp.FormattingEnabled = true;
+            this.cmbtgrupp.Location = new System.Drawing.Point(490, 38);
+            this.cmbtgrupp.Name = "cmbtgrupp";
+            this.cmbtgrupp.Size = new System.Drawing.Size(121, 21);
+            this.cmbtgrupp.TabIndex = 12;
+            this.cmbtgrupp.SelectedIndexChanged += new System.EventHandler(this.cmbtgrupp_SelectedIndexChanged);
+            // 
             // LedareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 716);
-            this.Controls.Add(this.btnLedare);
-            this.Controls.Add(this.listBox4);
+            this.ClientSize = new System.Drawing.Size(1030, 684);
+            this.Controls.Add(this.cmbtgrupp);
             this.Controls.Add(this.gbUtskrift);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btntabort);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.lbxnarvaro);
+            this.Controls.Add(this.lblmedlemmar);
+            this.Controls.Add(this.lbltraningar);
+            this.Controls.Add(this.lbxtraningar);
+            this.Controls.Add(this.btnnarvaro);
+            this.Controls.Add(this.lbxmedlemmar);
             this.Name = "LedareForm";
             this.Text = "LedareForm";
             this.gbUtskrift.ResumeLayout(false);
@@ -294,21 +289,19 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox lbxmedlemmar;
+        private System.Windows.Forms.Button btnnarvaro;
+        private System.Windows.Forms.ListBox lbxtraningar;
+        private System.Windows.Forms.Label lbltraningar;
+        private System.Windows.Forms.Label lblmedlemmar;
+        private System.Windows.Forms.ListBox lbxnarvaro;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btntabort;
         private System.Windows.Forms.GroupBox gbUtskrift;
         private System.Windows.Forms.Button btnUtskrift;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.TextBox tbxdatum1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txbdatum2;
         private System.Windows.Forms.ListBox lbxTgrupp;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox lbxLedare;
@@ -316,5 +309,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnTgrupp;
         private System.Windows.Forms.Button btnLedare;
+        private System.Windows.Forms.ComboBox cmbtgrupp;
     }
 }

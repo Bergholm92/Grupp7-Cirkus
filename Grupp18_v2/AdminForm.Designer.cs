@@ -31,10 +31,10 @@
             this.lbxMedlem = new System.Windows.Forms.ListBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbxfnamn = new System.Windows.Forms.TextBox();
+            this.tbxenamn = new System.Windows.Forms.TextBox();
+            this.tbxadress = new System.Windows.Forms.TextBox();
+            this.tbxepost = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,18 +44,18 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.tbxtele = new System.Windows.Forms.TextBox();
+            this.tbxmobil = new System.Windows.Forms.TextBox();
+            this.tbxkön = new System.Windows.Forms.TextBox();
+            this.tbxprsnummer = new System.Windows.Forms.TextBox();
+            this.tbxmedlemsid = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblMId = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbxfoto = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.cbxmedlems = new System.Windows.Forms.ComboBox();
+            this.tbxmedlemstyp = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnTraning = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -88,34 +88,34 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Medlemmar";
             // 
-            // textBox1
+            // tbxfnamn
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 58);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.tbxfnamn.Location = new System.Drawing.Point(13, 58);
+            this.tbxfnamn.Name = "tbxfnamn";
+            this.tbxfnamn.Size = new System.Drawing.Size(100, 20);
+            this.tbxfnamn.TabIndex = 3;
             // 
-            // textBox2
+            // tbxenamn
             // 
-            this.textBox2.Location = new System.Drawing.Point(13, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.tbxenamn.Location = new System.Drawing.Point(13, 106);
+            this.tbxenamn.Name = "tbxenamn";
+            this.tbxenamn.Size = new System.Drawing.Size(100, 20);
+            this.tbxenamn.TabIndex = 4;
             // 
-            // textBox3
+            // tbxadress
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 147);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.tbxadress.Location = new System.Drawing.Point(13, 147);
+            this.tbxadress.Name = "tbxadress";
+            this.tbxadress.Size = new System.Drawing.Size(100, 20);
+            this.tbxadress.TabIndex = 5;
             // 
-            // textBox4
+            // tbxepost
             // 
-            this.textBox4.Location = new System.Drawing.Point(13, 191);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 6;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.tbxepost.Location = new System.Drawing.Point(13, 191);
+            this.tbxepost.Name = "tbxepost";
+            this.tbxepost.Size = new System.Drawing.Size(100, 20);
+            this.tbxepost.TabIndex = 6;
+            this.tbxepost.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label2
             // 
@@ -198,42 +198,42 @@
             this.label11.TabIndex = 16;
             this.label11.Text = "Personnummer";
             // 
-            // textBox5
+            // tbxtele
             // 
-            this.textBox5.Location = new System.Drawing.Point(175, 58);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 17;
+            this.tbxtele.Location = new System.Drawing.Point(175, 58);
+            this.tbxtele.Name = "tbxtele";
+            this.tbxtele.Size = new System.Drawing.Size(100, 20);
+            this.tbxtele.TabIndex = 17;
             // 
-            // textBox6
+            // tbxmobil
             // 
-            this.textBox6.Location = new System.Drawing.Point(175, 106);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 18;
+            this.tbxmobil.Location = new System.Drawing.Point(175, 106);
+            this.tbxmobil.Name = "tbxmobil";
+            this.tbxmobil.Size = new System.Drawing.Size(100, 20);
+            this.tbxmobil.TabIndex = 18;
             // 
-            // textBox8
+            // tbxkön
             // 
-            this.textBox8.Location = new System.Drawing.Point(175, 191);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 20;
+            this.tbxkön.Location = new System.Drawing.Point(175, 191);
+            this.tbxkön.Name = "tbxkön";
+            this.tbxkön.Size = new System.Drawing.Size(100, 20);
+            this.tbxkön.TabIndex = 20;
             // 
-            // textBox9
+            // tbxprsnummer
             // 
-            this.textBox9.Location = new System.Drawing.Point(298, 58);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(63, 20);
-            this.textBox9.TabIndex = 21;
+            this.tbxprsnummer.Location = new System.Drawing.Point(298, 58);
+            this.tbxprsnummer.Name = "tbxprsnummer";
+            this.tbxprsnummer.Size = new System.Drawing.Size(63, 20);
+            this.tbxprsnummer.TabIndex = 21;
             // 
-            // textBox10
+            // tbxmedlemsid
             // 
-            this.textBox10.Location = new System.Drawing.Point(298, 105);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(76, 20);
-            this.textBox10.TabIndex = 22;
+            this.tbxmedlemsid.Location = new System.Drawing.Point(298, 105);
+            this.tbxmedlemsid.Margin = new System.Windows.Forms.Padding(2);
+            this.tbxmedlemsid.Name = "tbxmedlemsid";
+            this.tbxmedlemsid.ReadOnly = true;
+            this.tbxmedlemsid.Size = new System.Drawing.Size(76, 20);
+            this.tbxmedlemsid.TabIndex = 22;
             // 
             // label6
             // 
@@ -265,16 +265,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // checkBox1
+            // cbxfoto
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(175, 147);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(119, 17);
-            this.checkBox1.TabIndex = 29;
-            this.checkBox1.Text = "Vill du fotograferas?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.cbxfoto.AutoSize = true;
+            this.cbxfoto.Location = new System.Drawing.Point(175, 147);
+            this.cbxfoto.Name = "cbxfoto";
+            this.cbxfoto.Size = new System.Drawing.Size(119, 17);
+            this.cbxfoto.TabIndex = 29;
+            this.cbxfoto.Text = "Vill du fotograferas?";
+            this.cbxfoto.UseVisualStyleBackColor = true;
+            this.cbxfoto.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button2
             // 
@@ -286,27 +286,27 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // comboBox1
+            // cbxmedlems
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbxmedlems.FormattingEnabled = true;
+            this.cbxmedlems.Items.AddRange(new object[] {
             "Medlem",
             "Prova-På",
             "Cirkusvän"});
-            this.comboBox1.Location = new System.Drawing.Point(298, 175);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(71, 21);
-            this.comboBox1.TabIndex = 32;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbxmedlems.Location = new System.Drawing.Point(298, 175);
+            this.cbxmedlems.Name = "cbxmedlems";
+            this.cbxmedlems.Size = new System.Drawing.Size(71, 21);
+            this.cbxmedlems.TabIndex = 32;
+            this.cbxmedlems.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // textBox11
+            // tbxmedlemstyp
             // 
-            this.textBox11.Location = new System.Drawing.Point(298, 145);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(70, 20);
-            this.textBox11.TabIndex = 24;
+            this.tbxmedlemstyp.Location = new System.Drawing.Point(298, 145);
+            this.tbxmedlemstyp.Margin = new System.Windows.Forms.Padding(2);
+            this.tbxmedlemstyp.Name = "tbxmedlemstyp";
+            this.tbxmedlemstyp.ReadOnly = true;
+            this.tbxmedlemstyp.Size = new System.Drawing.Size(70, 20);
+            this.tbxmedlemstyp.TabIndex = 24;
             // 
             // button1
             // 
@@ -335,18 +335,18 @@
             this.ClientSize = new System.Drawing.Size(638, 422);
             this.Controls.Add(this.btnTraning);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxmedlems);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbxfoto);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.lblMId);
-            this.Controls.Add(this.textBox11);
+            this.Controls.Add(this.tbxmedlemstyp);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.tbxmedlemsid);
+            this.Controls.Add(this.tbxprsnummer);
+            this.Controls.Add(this.tbxkön);
+            this.Controls.Add(this.tbxmobil);
+            this.Controls.Add(this.tbxtele);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -356,10 +356,10 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxepost);
+            this.Controls.Add(this.tbxadress);
+            this.Controls.Add(this.tbxenamn);
+            this.Controls.Add(this.tbxfnamn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.lbxMedlem);
@@ -376,10 +376,10 @@
         private System.Windows.Forms.ListBox lbxMedlem;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbxfnamn;
+        private System.Windows.Forms.TextBox tbxenamn;
+        private System.Windows.Forms.TextBox tbxadress;
+        private System.Windows.Forms.TextBox tbxepost;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -389,18 +389,18 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox tbxtele;
+        private System.Windows.Forms.TextBox tbxmobil;
+        private System.Windows.Forms.TextBox tbxkön;
+        private System.Windows.Forms.TextBox tbxprsnummer;
+        private System.Windows.Forms.TextBox tbxmedlemsid;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblMId;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbxfoto;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.ComboBox cbxmedlems;
+        private System.Windows.Forms.TextBox tbxmedlemstyp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnTraning;
     }

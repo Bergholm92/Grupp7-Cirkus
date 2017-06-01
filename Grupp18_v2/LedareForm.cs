@@ -51,8 +51,8 @@ namespace Grupp18_v2
             conn.Open();
             cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id where datum BETWEEN @d1 AND @d2 ", conn);
 
-            d1 = Convert.ToDateTime(textBox1.Text);
-            d2 = Convert.ToDateTime(textBox2.Text);
+            d1 = Convert.ToDateTime(tbxdatum1.Text);
+            d2 = Convert.ToDateTime(txbdatum2.Text);
             cmd.Parameters.AddWithValue("@d1", d1);
             cmd.Parameters.AddWithValue("@d2", d2);
             using (dr = cmd.ExecuteReader())
@@ -318,33 +318,24 @@ namespace Grupp18_v2
 
         private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
-            int id;
+           
             
             try
             {
                 conn.Open();
                 cmd = new NpgsqlCommand("SELECT * FROM medlem INNER JOIN ingar ON ingar.medlems_id=medlem.medlems_id WHERE ingar.traningsgrupp_id = @id; ", conn);
 
-                if (comboBox1.SelectedItem == "Akrobatik")
+                if (cmbtgrupp.SelectedIndex > -1)
                 {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@id", id);
+                    Traningsgrupp TG;
+                    TG = (Traningsgrupp)cmbtgrupp.SelectedItem;
+                    cmd.Parameters.AddWithValue("@id", TG.Traningsgrupp_id);
                 }
-                else if (comboBox1.SelectedItem == "Jonglering")
+                else if (cmbtgrupp.SelectedIndex == -1)
                 {
-                    id = 2;
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", 0);
                 }
-                else if (comboBox1.SelectedItem == "Klot")
-                {
-                    id = 3;
-                    cmd.Parameters.AddWithValue("@id", id);
-                }
-                else if (comboBox1.SelectedItem == null)
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@id", id);
-                }
+
 
                 dr = cmd.ExecuteReader();
 
@@ -370,40 +361,31 @@ namespace Grupp18_v2
 
         public List<Träning> GetTräningar(List<Träning> Träningar)
         {
-            int id;
+            
             try
             {
                 conn.Open();
                 cmd = new NpgsqlCommand("Select traning_id, datum, beskrivning,plats_fk,traningsgrupp_fk, traningsgrupp.namn, plats.namn AS Plats from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk INNER JOIN plats ON plats.plats_id=traning.plats_fk WHERE traning.traningsgrupp_fk = @tFK", conn);
-                
 
 
-                if (comboBox1.SelectedItem == "Akrobatik")
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == "Jonglering")
-                {
-                    id = 2;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == "Klot")
-                {
-                    id = 3;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == null)
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                dr = cmd.ExecuteReader();
 
-                while (dr.Read())
+                if (cmbtgrupp.SelectedIndex > -1)
                 {
+                    {
+                        Traningsgrupp TG;
+                        TG = (Traningsgrupp)cmbtgrupp.SelectedItem;
 
-                    träningslist.Add(new Träning(dr.GetInt32(dr.GetOrdinal("traning_id")), dr.GetDateTime(dr.GetOrdinal("datum")), dr["beskrivning"].ToString(), dr.GetInt32(dr.GetOrdinal("traningsgrupp_fk")), dr.GetInt32(dr.GetOrdinal("plats_fk")), dr["namn"].ToString(), dr["Plats"].ToString()));
+                        cmd.Parameters.AddWithValue("@tFK", TG.Traningsgrupp_id);
+                    }
+
+                    dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+
+                        träningslist.Add(new Träning(dr.GetInt32(dr.GetOrdinal("traning_id")), dr.GetDateTime(dr.GetOrdinal("datum")), dr["beskrivning"].ToString(), dr.GetInt32(dr.GetOrdinal("traningsgrupp_fk")), dr.GetInt32(dr.GetOrdinal("plats_fk")), dr["namn"].ToString(), dr["Plats"].ToString()));
+                    }
+                    return Träningar;
                 }
                 return Träningar;
             }
@@ -505,12 +487,13 @@ namespace Grupp18_v2
 
         private void UpdateAll()
         {
-            listBox1.Items.Clear();
-            listBox2.Items.Clear();
-            listBox3.Items.Clear();
-            listBox4.Items.Clear();
+            lbxtraningar.Items.Clear();
+            lbxmedlemmar.Items.Clear();
+            lbxnarvaro.Items.Clear();
+            
             lbxLedare.Items.Clear();
             lbxTgrupp.Items.Clear();
+     
             medlemslist.Clear();
             träningslist.Clear();
             Närvarolist.Clear();
@@ -525,20 +508,20 @@ namespace Grupp18_v2
 
             foreach (Medlem m in medlemslist)
             {
-                listBox2.Items.Add(m);
+                lbxmedlemmar.Items.Add(m);
             }
-            listBox2.DisplayMember = "ShowMembers";
+            lbxmedlemmar.DisplayMember = "ShowMembers";
 
             foreach (Träning T in träningslist)
             {
-                listBox1.Items.Add(T);
+                lbxtraningar.Items.Add(T);
             }
-            listBox1.DisplayMember = "Showtraning";
+            lbxtraningar.DisplayMember = "Showtraning";
             foreach (Narvaro N in Närvarolist)
             {
-                listBox3.Items.Add(N);
+                lbxnarvaro.Items.Add(N);
             }
-            listBox3.DisplayMember = "Shownarvaro";
+            lbxnarvaro.DisplayMember = "Shownarvaro";
             foreach (Traningsgrupp Tr in Traningsgrupplist)
             {
                 lbxTgrupp.Items.Add(Tr);
@@ -549,36 +532,28 @@ namespace Grupp18_v2
                 lbxLedare.Items.Add(L);
             }
             lbxLedare.DisplayMember = "ShowMembers";
+            cmbtgrupp.Items.Clear();
+            foreach (Traningsgrupp TG in Traningsgrupplist)
+            {
+                cmbtgrupp.Items.Add(TG);
+            }
+            cmbtgrupp.DisplayMember = "Showtraningsgrupp";
 
+            
 
 
         }
         private void UpdateAll2()
         {
-            
-            listBox2.Items.Clear();
-            listBox3.Items.Clear();
-            medlemslist.Clear();
-            
+            lbxnarvaro.Items.Clear();
             Närvarolist.Clear();
-
-            GetMedlemmar(medlemslist);
-            GetTräningar(träningslist);
             Getnarvaro(Närvarolist);
-            foreach (Medlem m in medlemslist)
-            {
-                listBox2.Items.Add(m);
-            }
-            listBox2.DisplayMember = "ShowMembers";
-
-   
+            
             foreach (Narvaro N in Närvarolist)
             {
-                listBox3.Items.Add(N);
+                lbxnarvaro.Items.Add(N);
             }
-            listBox3.DisplayMember = "Shownarvaro";
-
-
+            lbxnarvaro.DisplayMember = "Shownarvaro";
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -590,7 +565,6 @@ namespace Grupp18_v2
         {
             Narvaro N = new Narvaro(träning, medlems_id);
             N.Addnarvaro(träning, medlems_id);
-            Getnarvaro(Närvarolist);
             UpdateAll2();
            
             
@@ -602,8 +576,8 @@ namespace Grupp18_v2
             ListBox L = sender as ListBox;
             if (L.SelectedIndex != -1)
             {
-                listBox2.SelectedIndex = L.SelectedIndex;
-                Medlem M = (Medlem)listBox2.SelectedItem;
+                lbxmedlemmar.SelectedIndex = L.SelectedIndex;
+                Medlem M = (Medlem)lbxmedlemmar.SelectedItem;
                 medlems_id = M.Medlems_id;
                
                 
@@ -617,11 +591,11 @@ namespace Grupp18_v2
             ListBox C = sender as ListBox;
             if (C.SelectedIndex != -1)
             {
-                listBox1.SelectedIndex = C.SelectedIndex;
-                Träning T = (Träning)listBox1.SelectedItem;
+                lbxtraningar.SelectedIndex = C.SelectedIndex;
+                Träning T = (Träning)lbxtraningar.SelectedItem;
                 träning = T.Tränings_id;
                 Närvarolist.Clear();
-                listBox3.Items.Clear();
+                lbxnarvaro.Items.Clear();
 
 
             }
@@ -631,11 +605,8 @@ namespace Grupp18_v2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            GetMedlemmar(medlemslist);
             UpdateAll();
-            Närvarolist.Clear();
-            listBox3.Items.Clear();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -650,8 +621,8 @@ namespace Grupp18_v2
             ListBox M = sender as ListBox;
             if (M.SelectedIndex != -1)
             {
-                listBox3.SelectedIndex = M.SelectedIndex;
-                Narvaro N = (Narvaro)listBox3.SelectedItem;
+                lbxnarvaro.SelectedIndex = M.SelectedIndex;
+                Narvaro N = (Narvaro)lbxnarvaro.SelectedItem;
                 träning = N.Traning;
                 medlems_id = N.Medlem;
                  
@@ -729,13 +700,23 @@ namespace Grupp18_v2
                 Medlem L = (Medlem)lbxLedare.SelectedItem;
                 medlems_id = L.Medlems_id;
 
-
+                
 
             }
         }
 
         private void lbxTgrupp_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void cmbtgrupp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Traningsgrupp TG;
+            TG = (Traningsgrupp)cmbtgrupp.SelectedItem;
+            lbltraningar.Text = "Träningsgrupp: " + TG.Showtraningsgrupp;
+            UpdateAll2();
+            UpdateAll();
             
         }
     }

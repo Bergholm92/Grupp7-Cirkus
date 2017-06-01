@@ -62,6 +62,7 @@ namespace Grupp18_v2
 
         private void btnLedare_Click(object sender, EventArgs e)
         {
+
             var LedareForm = new LedareForm();
             LedareForm.Show();
         }
