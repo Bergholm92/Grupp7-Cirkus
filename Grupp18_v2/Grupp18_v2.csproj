@@ -78,7 +78,6 @@
     <Compile Include="LedareForm.Designer.cs">
       <DependentUpon>LedareForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Malsman.cs" />
     <Compile Include="Medlem.cs" />
     <Compile Include="Medlemstyp.cs" />
     <Compile Include="Narvaro.cs" />

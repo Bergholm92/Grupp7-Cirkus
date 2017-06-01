@@ -25,10 +25,11 @@ namespace Grupp18_v2
         List<Traningsgrupp> Traningsgrupplist = new List<Traningsgrupp>();
         List<Medlem> Ledarlist = new List<Medlem>();
         Traningsgrupp[] tarray;
-
+       
         string filepath;
         int medlems_id;
         int träning;
+        string tgrupp;
 
         DateTime d1;
         DateTime d2;
@@ -38,283 +39,330 @@ namespace Grupp18_v2
         {
             InitializeComponent();
             UpdateAll();
-
+           
 
 
         }
         public string pdfutskriftdatum(string path)
         {
-
-            Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
-            doc.Open();
-            conn.Open();
-            cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id where datum BETWEEN @d1 AND @d2 ", conn);
-
-            d1 = Convert.ToDateTime(tbxdatum1.Text);
-            d2 = Convert.ToDateTime(txbdatum2.Text);
-            cmd.Parameters.AddWithValue("@d1", d1);
-            cmd.Parameters.AddWithValue("@d2", d2);
-            using (dr = cmd.ExecuteReader())
+            try
             {
-                Paragraph p2 = new Paragraph("NÄRVAROKORT: \n \n");
-                doc.Add(p2);
-                while (dr.Read())
-                {
-                    Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
-                    doc.Add(p1);
-                }
-
-                dr.Close();
-            }
-            cmd = new NpgsqlCommand("SELECT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where traning.datum BETWEEN @d1 AND @d2", conn);
-            cmd.Parameters.AddWithValue("@d1", d1);
-            cmd.Parameters.AddWithValue("@d2", d2);
-
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-            }
-            cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, traning.beskrivning as beskriv from narvaro INNER JOIN traning ON traning.traning_id = narvaro.tranings_id where traning.datum BETWEEN @d1 AND @d2 GROUP BY traning.beskrivning ", conn);
-            cmd.Parameters.AddWithValue("@d1", d1);
-            cmd.Parameters.AddWithValue("@d2", d2);
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade:" + dr["beskriv"].ToString() + " | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-
-            }
-            cmd = new NpgsqlCommand("SELECT COUNT(traning.traningsgrupp_fk) as antalet, traningsgrupp.namn as namn from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk WHERE traning.datum BETWEEN @d1 AND @d2 GROUP BY traningsgrupp.namn", conn);
-            cmd.Parameters.AddWithValue("@d1", d1);
-            cmd.Parameters.AddWithValue("@d2", d2);
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " tillfällen tränade grupp:" + dr["namn"].ToString() + " | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-                conn.Close();
-
-
-
-
-                doc.Close();
-                MessageBox.Show("PDF filen skapades");
-
-
-
-            }
-            return path;
-        }
-        public string pdfutskriftledare(string path)
-        {
-
-            Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
-            doc.Open();
-            conn.Open();
-            cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN leder on leder.traning_id = traning.traning_id where leder.medlems_id = @mid ORDER BY bes ", conn);
-
-            cmd.Parameters.AddWithValue("@mid", medlems_id);
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p2 = new Paragraph("NÄRVAROKORT \n \n");
-                doc.Add(p2);
-                while (dr.Read())
-                {
-                    Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
-                    doc.Add(p1);
-                }
-
-                dr.Close();
-            }
-            cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where medlem.medlems_id=@mid", conn);
-            cmd.Parameters.AddWithValue("@mid", medlems_id);
-
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-            }
-            cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, beskrivning AS bes, datum AS dat from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN leder on leder.traning_id = traning.traning_id where leder.medlems_id = @mid GROUP BY beskrivning, datum", conn);
-            cmd.Parameters.AddWithValue("@mid", medlems_id);
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade: " + dr["bes"].ToString() + " | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-
-            }
-            cmd = new NpgsqlCommand("SELECT COUNT(traning.traning_id) as antalet, medlem.förnamn as fnamn, medlem.efternamn as enamn from traning INNER JOIN leder ON leder.traning_id = traning.traning_id INNER JOIN medlem ON leder.medlems_id = medlem.medlems_id where leder.medlems_id = @mid GROUP BY medlem.förnamn, medlem.efternamn", conn);
-            cmd.Parameters.AddWithValue("@mid", medlems_id);
-            using (dr = cmd.ExecuteReader())
-            {
-                Paragraph p1 = new Paragraph(" \n" + "");
-                doc.Add(p1);
-                while (dr.Read())
-
-                {
-                    Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " gånger ledde :" + dr["fnamn"].ToString() + " " + dr["enamn"].ToString() + " olika träningar | ");
-
-                    doc.Add(p2);
-                }
-                dr.Close();
-                conn.Close();
-
-
-
-
-                doc.Close();
-                MessageBox.Show("PDF filen skapades");
-
-
-
-            }
-            return path;
-        }
-        public string pdfutskriftTgrupp(string path)
-        {
-            int count = 0;
-            int antal = Convert.ToInt32(lbxTgrupp.SelectedItems.Count);
-            tarray = new Traningsgrupp[antal];
-
-            foreach (Traningsgrupp TG in lbxTgrupp.SelectedItems)
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    tarray[count] = TG;
-                }
-                count++;
-            }
-            Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
-            doc.Open();
-            conn.Open();
-            Paragraph p2 = new Paragraph("NÄRVAROKORT \n \n");
-            doc.Add(p2);
-            
-            for (int i = 0; i < tarray.Length; i++)
-            {
+                //Skapar ett dokument som sedan utgör pdf-dokumentet.
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
                 doc.Open();
-
-                cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp.traningsgrupp_id = @tgid ORDER BY bes ", conn);
-                cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id );
+                //Öppnar connection och skriver ut SQL-frågan nedan. Denna process görs flertalet gånger till varje fråga.
+                conn.Open();
+                cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id where datum BETWEEN @d1 AND @d2 ", conn);
+                //Använder oss av olika parametrar för att kunna mata in värden på ett säkert sätt.
+                d1 = Convert.ToDateTime(tbxdatum1.Text);
+                d2 = Convert.ToDateTime(tbxdatum2.Text);
+                cmd.Parameters.AddWithValue("@d1", d1);
+                cmd.Parameters.AddWithValue("@d2", d2);
                 using (dr = cmd.ExecuteReader())
                 {
+                    Paragraph p2 = new Paragraph("NÄRVAROKORT: "+ tbxdatum1.Text + " - " + tbxdatum2.Text +  " \n \n");
+                    doc.Add(p2);
+                    while (dr.Read())
+                    {
+                        //Lägger till en paragraph till dokumentet som innehåller det vi hämtar från databasen.
+                        Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
+                        doc.Add(p1);
+                    }
+
+                    dr.Close();
+                }
+                // Samma som ovan
+                cmd = new NpgsqlCommand("SELECT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where traning.datum BETWEEN @d1 AND @d2", conn);
+                cmd.Parameters.AddWithValue("@d1", d1);
+                cmd.Parameters.AddWithValue("@d2", d2);
+
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
+
+                        doc.Add(p2);
+                    }
+                    dr.Close();
+                }
+                // Samma som ovan
+                cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, traning.beskrivning as beskriv from narvaro INNER JOIN traning ON traning.traning_id = narvaro.tranings_id where traning.datum BETWEEN @d1 AND @d2 GROUP BY traning.beskrivning ", conn);
+                cmd.Parameters.AddWithValue("@d1", d1);
+                cmd.Parameters.AddWithValue("@d2", d2);
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade:" + dr["beskriv"].ToString() + " | ");
+
+                        doc.Add(p2);
+                    }
+                    dr.Close();
+
+                }
+                // Samma som ovan
+                cmd = new NpgsqlCommand("SELECT COUNT(traning.traningsgrupp_fk) as antalet, traningsgrupp.namn as namn from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk WHERE traning.datum BETWEEN @d1 AND @d2 GROUP BY traningsgrupp.namn", conn);
+                cmd.Parameters.AddWithValue("@d1", d1);
+                cmd.Parameters.AddWithValue("@d2", d2);
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " tillfällen tränade grupp:" + dr["namn"].ToString() + " | ");
+
+                        doc.Add(p2);
+                    }
+                    //Stänger alla saker som dr:en, connectionen och dokumentet. Och skriver sedan ut en messagebox där det rapporteras att PDF-filen skapas. 
+                    dr.Close();
+                    conn.Close();
+                    doc.Close();
+                    MessageBox.Show("PDF filen skapades");
+
+
+
+                }
+
+                return path;
+            }
+            catch
+            {
+                MessageBox.Show("Fel inmatning");
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        } //metod för att skriva ut baserat på datumintervall.
+        public string pdfutskriftledare(string path)
+        {
+            Medlem L = (Medlem)lbxLedare.SelectedItem;
+            try
+            {
+                //Exakt samma sätt som datum metoden. Bara att dessa parametrar nu matar in vilken ledare.
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
+                doc.Open();
+                conn.Open();
+                cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN leder on leder.traning_id = traning.traning_id where leder.medlems_id = @mid ORDER BY bes ", conn);
+
+                cmd.Parameters.AddWithValue("@mid", medlems_id);
+                using (dr = cmd.ExecuteReader())
+                   
+                {
                     
-                    
+                    Paragraph p2 = new Paragraph("NÄRVAROKORT för: " + L.ShowMembers + " \n \n");
+                    doc.Add(p2);
                     while (dr.Read())
                     {
                         Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
                         doc.Add(p1);
                     }
+
+                    dr.Close();
                 }
-               
+                cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where medlem.medlems_id=@mid", conn);
+                cmd.Parameters.AddWithValue("@mid", medlems_id);
+
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
+
+                        doc.Add(p2);
+                    }
+                    dr.Close();
+                }
+                cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, beskrivning AS bes, datum AS dat from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN leder on leder.traning_id = traning.traning_id where leder.medlems_id = @mid GROUP BY beskrivning, datum", conn);
+                cmd.Parameters.AddWithValue("@mid", medlems_id);
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade: " + dr["bes"].ToString() + " | ");
+
+                        doc.Add(p2);
+                    }
+                    dr.Close();
+
+                }
+                cmd = new NpgsqlCommand("SELECT COUNT(traning.traning_id) as antalet, medlem.förnamn as fnamn, medlem.efternamn as enamn from traning INNER JOIN leder ON leder.traning_id = traning.traning_id INNER JOIN medlem ON leder.medlems_id = medlem.medlems_id where leder.medlems_id = @mid GROUP BY medlem.förnamn, medlem.efternamn", conn);
+                cmd.Parameters.AddWithValue("@mid", medlems_id);
+                using (dr = cmd.ExecuteReader())
+                {
+                    Paragraph p1 = new Paragraph(" \n" + "");
+                    doc.Add(p1);
+                    while (dr.Read())
+
+                    {
+                        Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " gånger ledde :" + dr["fnamn"].ToString() + " " + dr["enamn"].ToString() + " olika träningar | ");
+
+                        doc.Add(p2);
+                    }
+                    dr.Close();
+                    conn.Close();
+
+
+
+
+                    doc.Close();
+                    MessageBox.Show("PDF filen skapades");
+
+                    return path;
+
+                }
+              
             }
-            doc.Open();
-            Paragraph p3 = new Paragraph("\n  LEDARE: \n");
-            doc.Add(p3);
-            for (int i = 0; i < tarray.Length; i++)
+            catch
             {
+                MessageBox.Show("Ingen ledare är vald");
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        } //metod för att skriva ut baserat på ledare.
+        public string pdfutskriftTgrupp(string path)
+        {
+            try
+            {
+                //Denna metod blir lite annorlunda jämförelse med de andra. Eftersom man under just Träningsgrupp ville kunna använda en-eller flera så har vi skapat en for-loop
+                int count = 0;
+                int antal = Convert.ToInt32(lbxTgrupp.SelectedItems.Count);
+                tarray = new Traningsgrupp[antal];
+                //Vi kör först en foreach-loop där vi loopar igenom alla träningsgrupper som är selectade i listboxen.
+                foreach (Traningsgrupp TG in lbxTgrupp.SelectedItems)
+                {
+                    for (int i = 0; i < 1; i++)
+                    {
+                        //Här har vi gjort en for-loop som helt enkelt lägger till varje träningsgrupp i en array som består av träningsgrupper.
+                        tarray[count] = TG;
+                        tgrupp =  tgrupp + " | " +  tarray[count].Showtraningsgrupp;
+                    }
+                    count++;
+                }
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
                 doc.Open();
-
-                cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en, traning.beskrivning as bes from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id INNER JOIN traningsgrupp ON traning.traningsgrupp_fk = traningsgrupp.traningsgrupp_id where traningsgrupp_id = @tgid; ", conn);
-                cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
-                using (dr = cmd.ExecuteReader())
-                {
-
-
-                    while (dr.Read())
-                    {
-                        Paragraph p1 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " |  Träning: " + dr["bes"].ToString());
-                        doc.Add(p1);
-                    }
-                }
-
-            }
-            doc.Open();
-            Paragraph p4 = new Paragraph("\n Antal medlemmar på olika träningar: \n");
-            doc.Add(p4);
-            for (int i = 0; i < tarray.Length; i++)
-            {
+                conn.Open();
                 
-                cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, beskrivning AS bes, datum AS dat from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN traningsgrupp ON traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp_id = @tgid GROUP BY beskrivning, datum", conn);
-                cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
-                using (dr = cmd.ExecuteReader())
+                Paragraph p2 = new Paragraph("NÄRVAROKORT för grupperna:"  + tgrupp + " \n \n");
+                doc.Add(p2);
+                //Här gör vi även en for-loop som för varje tarray-item kör den igenom och lägger då till tarray[i].Traningsgrupp_id till SQL frågan vilket då gör att vi får med varje träningsgrupp som är selectad.
+                for (int i = 0; i < tarray.Length; i++)
                 {
-                    while (dr.Read())
+                    doc.Open();
+
+                    cmd = new NpgsqlCommand("SELECT beskrivning AS bes, datum AS dat, medlem.förnamn AS fn, medlem.efternamn AS en, medlem.personnummer AS pers from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp.traningsgrupp_id = @tgid ORDER BY bes ", conn);
+                    cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
+                    using (dr = cmd.ExecuteReader())
                     {
-                        Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st    tränade" + " | " + dr["bes"].ToString());
-                        doc.Add(p1);
+
+
+                        while (dr.Read())
+                        {
+                            //Samma här lägger vi till alla valda stringar till paragraphen. 
+                            Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
+                            doc.Add(p1);
+                        }
+                    }
+
+                }
+                doc.Open();
+                Paragraph p3 = new Paragraph("\n  LEDARE: \n");
+                doc.Add(p3);
+                for (int i = 0; i < tarray.Length; i++)
+                {
+                    doc.Open();
+
+                    cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en, traning.beskrivning as bes from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id INNER JOIN traningsgrupp ON traning.traningsgrupp_fk = traningsgrupp.traningsgrupp_id where traningsgrupp_id = @tgid; ", conn);
+                    cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
+                    using (dr = cmd.ExecuteReader())
+                    {
+
+
+                        while (dr.Read())
+                        {
+                            Paragraph p1 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " |  Träning: " + dr["bes"].ToString());
+                            doc.Add(p1);
+                        }
+                    }
+
+                }
+                //Vi gör en for-loop för varje fråga som ovan för att kunna köra alla valda items.
+                doc.Open();
+                Paragraph p4 = new Paragraph("\n Antal medlemmar på olika träningar: \n");
+                doc.Add(p4);
+                for (int i = 0; i < tarray.Length; i++)
+                {
+
+                    cmd = new NpgsqlCommand("SELECT COUNT(narvaro.medlems_id) as antal, beskrivning AS bes, datum AS dat from traning INNER JOIN narvaro ON narvaro.tranings_id = traning.traning_id INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id INNER JOIN traningsgrupp ON traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp_id = @tgid GROUP BY beskrivning, datum", conn);
+                    cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
+                    using (dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st    tränade" + " | " + dr["bes"].ToString());
+                            doc.Add(p1);
+                        }
                     }
                 }
+                doc.Open();
+                Paragraph p5 = new Paragraph("\n ANTAL TRÄNINGAR PER TRÄNINGSGRUPP \n");
+                doc.Add(p5);
+                for (int i = 0; i < tarray.Length; i++)
+                {
+
+                    cmd = new NpgsqlCommand("SELECT COUNT(traning.traning_id) as antal, traningsgrupp.namn as namn  from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp.traningsgrupp_id = @tgid GROUP BY traningsgrupp.namn", conn);
+                    cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
+                    using (dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st träningar   har genomförst av " + "  " + dr["namn"].ToString() + " gruppen");
+                            doc.Add(p1);
+                        }
+                    }
+                }
+                doc.Close();
+                conn.Close();
+                return path;
+
             }
-            doc.Open();
-            Paragraph p5 = new Paragraph("\n ANTAL TRÄNINGAR PER TRÄNINGSGRUPP \n");
-            doc.Add(p5);
-            for (int i = 0; i < tarray.Length; i++)
+            catch
             {
-
-                cmd = new NpgsqlCommand("SELECT COUNT(traning.traning_id) as antal, traningsgrupp.namn as namn  from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk where traningsgrupp.traningsgrupp_id = @tgid GROUP BY traningsgrupp.namn", conn);
-                cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
-                using (dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st träningar   har genomförst av " + "  " + dr["namn"].ToString() + " gruppen" );
-                        doc.Add(p1);
-                    }
-                }
+                MessageBox.Show("Ingen träningsgrupp vald");
+                return null;
             }
-            doc.Close();
-            conn.Close();
-            return path;
-        
+            finally
+            {
+                conn.Close();
+            }
+        } //metod för att skriva ut baserat på Träningsgrupper.
 
-        }
 
-     
-        
 
-        
+
+
 
         private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
@@ -357,7 +405,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//En metod för att hämta alla medlemmar.
 
         public List<Träning> GetTräningar(List<Träning> Träningar)
         {
@@ -398,7 +446,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//En metod för att hämta alla träningar
         public List<Narvaro> Getnarvaro(List<Narvaro> narvaror)
         {
 
@@ -424,7 +472,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//En metod för att hämta all närvaro
 
         private List<Traningsgrupp> GetTraningsgrupp(List<Traningsgrupp> traningsgrupper)
         {
@@ -452,7 +500,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//En metod för att hämta alla träningsgrupper
 
         private List<Medlem> GetLedare(List<Medlem> ledarna)
         {
@@ -483,7 +531,7 @@ namespace Grupp18_v2
             {
                 conn.Close();
             }
-        }
+        }//En metod för att hämta alla ledare.
 
         private void UpdateAll()
         {
@@ -542,8 +590,8 @@ namespace Grupp18_v2
             
 
 
-        }
-        private void UpdateAll2()
+        }//En update-metod som helt enkelt uppdaterar allt som behövs uppdatera i gränssnittet men även listor.
+        private void UpdateAll2()//En annan update-metod som har i fokus att endast beröra närvarolistan vilket vi gjorde i en separat metod.
         {
             lbxnarvaro.Items.Clear();
             Närvarolist.Clear();
@@ -556,22 +604,19 @@ namespace Grupp18_v2
             lbxnarvaro.DisplayMember = "Shownarvaro";
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void button1_Click(object sender, EventArgs e)
         {
             Narvaro N = new Narvaro(träning, medlems_id);
-            N.Addnarvaro(träning, medlems_id);
+            N.Addnarvaro(träning, medlems_id);//Här finns en metod som lägger till närvaro till närvaro-listan i databasen.
             UpdateAll2();
            
             
 
         }
 
-        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)//När listboxen ändras så kommer medlems_id få det värde som det selectade itemet har.
         {
             ListBox L = sender as ListBox;
             if (L.SelectedIndex != -1)
@@ -585,7 +630,7 @@ namespace Grupp18_v2
             }
         }
 
-        public void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        public void listBox1_SelectedIndexChanged(object sender, EventArgs e)//När listboxen ändras så kommer int traning få det värde som det selectade itemet har.
         {
            
             ListBox C = sender as ListBox;
@@ -612,11 +657,11 @@ namespace Grupp18_v2
         private void button2_Click(object sender, EventArgs e)
         {
             Narvaro N = new Narvaro(träning, medlems_id);
-            N.Removenarvaro(träning, medlems_id);
+            N.Removenarvaro(träning, medlems_id);//Även här finns en metod för att tabort närvaro 
             UpdateAll2();
         }
 
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)//Även här blir medlems_id inten det värdet som selectade itemet har.
         {
             ListBox M = sender as ListBox;
             if (M.SelectedIndex != -1)
@@ -633,15 +678,15 @@ namespace Grupp18_v2
         }
 
 
-        private void btnUtskrift_Click(object sender, EventArgs e)
+        private void btnUtskrift_Click(object sender, EventArgs e)//Knappen för att skriva ut en utskrift baserat på datumintervall.
         {
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();//Här kommer dialogrutan upp så man kan spara sitt dokument på vald plats.
             saveFileDialog1.Filter = "PDF dokument|*.pdf";
             saveFileDialog1.Title = "Spara ett dokument";
             saveFileDialog1.ShowDialog();
 
-            filepath = saveFileDialog1.FileName;
+            filepath = saveFileDialog1.FileName; //En string som helt enkelt sparar saveFileDialog1.FileName så vi kan använda den till de metoden som vill ha en filepath.
             pdfutskriftdatum(filepath);
             System.Diagnostics.Process.Start(filepath);
             UpdateAll();
@@ -658,7 +703,7 @@ namespace Grupp18_v2
             
         }
 
-        private void btnTgrupp_Click(object sender, EventArgs e)
+        private void btnTgrupp_Click(object sender, EventArgs e)//Knappen för att skriva ut en utskrift baserat på träningsgrupper. Samma saker sker här som i knappen ovan. 
         {
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -689,7 +734,7 @@ namespace Grupp18_v2
 
            
             
-        }
+        }//Knappen för att skriva ut en utskrift baserat på Ledare. Samma saker sker här som i datumknappen.
 
         private void lbxLedare_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -705,10 +750,6 @@ namespace Grupp18_v2
             }
         }
 
-        private void lbxTgrupp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private void cmbtgrupp_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -718,6 +759,6 @@ namespace Grupp18_v2
             UpdateAll2();
             UpdateAll();
             
-        }
+        }// Comboboxen som visar träningsgrupper. En label ändras beroende på den träningsgruppen man valde. 
     }
 }

@@ -62,10 +62,10 @@ namespace Grupp18_v2
             tbxkön.Clear();
             tbxprsnummer.Clear();
             tbxmedlemsid.Clear();
-            tbxmedlemstyp.Clear();
+            textBox11.Clear();
             lbxMedlem.Items.Clear();
             medlemslist.Clear();
-            cbxmedlems.SelectedIndex = -1;
+            comboBox1.SelectedIndex = -1;
             GetMedlemmar(medlemslist);
             foreach (Medlem m in medlemslist)
             {
@@ -95,7 +95,7 @@ namespace Grupp18_v2
             string telefon = tbxtele.Text;
             DateTime personnummer = Convert.ToDateTime(tbxprsnummer.Text);
             int medlems_id = Convert.ToInt32(tbxmedlemsid.Text);
-            int medlemstyp_id = Convert.ToInt32(tbxmedlemstyp.Text);
+            int medlemstyp_id = Convert.ToInt32(textBox11.Text);
 
             try
             {
@@ -124,17 +124,17 @@ namespace Grupp18_v2
                 cmd.Parameters.AddWithValue("@personnummer", personnummer);
                 cmd.Parameters.AddWithValue("@id", medlems_id);
 
-                if (cbxmedlems.SelectedItem == "Medlem")
+                if (comboBox1.SelectedItem == "Medlem")
                 {
                     medlemstyp_id = 1;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (cbxmedlems.SelectedItem == "Prova-På")
+                else if (comboBox1.SelectedItem == "Prova-På")
                 {
                     medlemstyp_id = 2;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
                 }
-                else if (cbxmedlems.SelectedItem == "Cirkusvän")
+                else if (comboBox1.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp_id = 3;
                     cmd.Parameters.AddWithValue("@medlemstyp", medlemstyp_id);
@@ -174,20 +174,20 @@ namespace Grupp18_v2
                 tbxprsnummer.Text = Convert.ToString(M.Personnummer);
                 tbxmedlemsid.Text = Convert.ToString(M.Medlems_id);
 
-                tbxmedlemstyp.Text = Convert.ToString(M.Medlemstyp_id);
-                if (tbxmedlemstyp.Text == "1")
+                textBox11.Text = Convert.ToString(M.Medlemstyp_id);
+                if (textBox11.Text == "1")
                 {
-                    cbxmedlems.SelectedItem = "Medlem";
+                    comboBox1.SelectedItem = "Medlem";
 
                 }
-                else if (tbxmedlemstyp.Text == "2")
+                else if (textBox11.Text == "2")
                 {
-                    cbxmedlems.SelectedItem = "Prova-På";
+                    comboBox1.SelectedItem = "Prova-På";
 
                 }
-                else if (tbxmedlemstyp.Text == "3")
+                else if (textBox11.Text == "3")
                 {
-                    cbxmedlems.SelectedItem = "Cirkusvän";
+                    comboBox1.SelectedItem = "Cirkusvän";
 
                 }
 
@@ -254,7 +254,7 @@ namespace Grupp18_v2
 
             try
             {
-                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), tbxkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(tbxmedlemstyp.Text), Convert.ToDateTime(tbxprsnummer.Text));
+                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), tbxkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(tbxprsnummer.Text));
 
             }
             catch (NpgsqlException dx)
@@ -290,17 +290,17 @@ namespace Grupp18_v2
                 }
 
                 cmd.Parameters.AddWithValue("@kön", kön);
-                if (cbxmedlems.SelectedItem == "Medlem")
+                if (comboBox1.SelectedItem == "Medlem")
                 {
                     medlemstyp = 1;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (cbxmedlems.SelectedItem == "Prova-På")
+                else if (comboBox1.SelectedItem == "Prova-På")
                 {
                     medlemstyp = 2;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
                 }
-                else if (cbxmedlems.SelectedItem == "Cirkusvän")
+                else if (comboBox1.SelectedItem == "Cirkusvän")
                 {
                     medlemstyp = 3;
                     cmd.Parameters.AddWithValue("@typid", medlemstyp);
@@ -361,22 +361,22 @@ namespace Grupp18_v2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxmedlems.SelectedItem == "Medlem")
+            if (comboBox1.SelectedItem == "Medlem")
             {
-                tbxmedlemstyp.Text = "1";
+                textBox11.Text = "1";
 
             }
 
-            else if (cbxmedlems.SelectedItem == "Prova-På")
+            else if (comboBox1.SelectedItem == "Prova-På")
             {
 
-                tbxmedlemstyp.Text = "2";
+                textBox11.Text = "2";
 
             }
-            else if (cbxmedlems.SelectedItem == "Cirkusvän")
+            else if (comboBox1.SelectedItem == "Cirkusvän")
             {
 
-                tbxmedlemstyp.Text = "3";
+                textBox11.Text = "3";
             }
      
 

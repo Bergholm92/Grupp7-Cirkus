@@ -38,16 +38,16 @@
             this.btntabort = new System.Windows.Forms.Button();
             this.gbUtskrift = new System.Windows.Forms.GroupBox();
             this.btnTgrupp = new System.Windows.Forms.Button();
+            this.btnLedare = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lbxLedare = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lbxTgrupp = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txbdatum2 = new System.Windows.Forms.TextBox();
+            this.tbxdatum2 = new System.Windows.Forms.TextBox();
             this.btnUtskrift = new System.Windows.Forms.Button();
             this.tbxdatum1 = new System.Windows.Forms.TextBox();
-            this.btnLedare = new System.Windows.Forms.Button();
             this.cmbtgrupp = new System.Windows.Forms.ComboBox();
             this.gbUtskrift.SuspendLayout();
             this.SuspendLayout();
@@ -139,7 +139,7 @@
             this.gbUtskrift.Controls.Add(this.label5);
             this.gbUtskrift.Controls.Add(this.lbxTgrupp);
             this.gbUtskrift.Controls.Add(this.label4);
-            this.gbUtskrift.Controls.Add(this.txbdatum2);
+            this.gbUtskrift.Controls.Add(this.tbxdatum2);
             this.gbUtskrift.Controls.Add(this.btnUtskrift);
             this.gbUtskrift.Controls.Add(this.tbxdatum1);
             this.gbUtskrift.Location = new System.Drawing.Point(415, 334);
@@ -158,6 +158,16 @@
             this.btnTgrupp.Text = "Skriv ut träningsgrupper";
             this.btnTgrupp.UseVisualStyleBackColor = true;
             this.btnTgrupp.Click += new System.EventHandler(this.btnTgrupp_Click);
+            // 
+            // btnLedare
+            // 
+            this.btnLedare.Location = new System.Drawing.Point(205, 299);
+            this.btnLedare.Name = "btnLedare";
+            this.btnLedare.Size = new System.Drawing.Size(79, 35);
+            this.btnLedare.TabIndex = 10;
+            this.btnLedare.Text = "Skriv ut ledare";
+            this.btnLedare.UseVisualStyleBackColor = true;
+            this.btnLedare.Click += new System.EventHandler(this.btnLedare_Click);
             // 
             // label7
             // 
@@ -207,7 +217,6 @@
             this.lbxTgrupp.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbxTgrupp.Size = new System.Drawing.Size(121, 160);
             this.lbxTgrupp.TabIndex = 4;
-            this.lbxTgrupp.SelectedIndexChanged += new System.EventHandler(this.lbxTgrupp_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -218,13 +227,13 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "mellan";
             // 
-            // txbdatum2
+            // tbxdatum2
             // 
-            this.txbdatum2.Location = new System.Drawing.Point(176, 70);
-            this.txbdatum2.Name = "txbdatum2";
-            this.txbdatum2.Size = new System.Drawing.Size(142, 20);
-            this.txbdatum2.TabIndex = 2;
-            this.txbdatum2.Text = "2017-01-05";
+            this.tbxdatum2.Location = new System.Drawing.Point(176, 70);
+            this.tbxdatum2.Name = "tbxdatum2";
+            this.tbxdatum2.Size = new System.Drawing.Size(142, 20);
+            this.tbxdatum2.TabIndex = 2;
+            this.tbxdatum2.Text = "2018-01-01";
             // 
             // btnUtskrift
             // 
@@ -244,16 +253,6 @@
             this.tbxdatum1.Size = new System.Drawing.Size(121, 20);
             this.tbxdatum1.TabIndex = 0;
             this.tbxdatum1.Text = "2015-01-01";
-            // 
-            // btnLedare
-            // 
-            this.btnLedare.Location = new System.Drawing.Point(205, 299);
-            this.btnLedare.Name = "btnLedare";
-            this.btnLedare.Size = new System.Drawing.Size(79, 35);
-            this.btnLedare.TabIndex = 10;
-            this.btnLedare.Text = "Skriv ut ledare";
-            this.btnLedare.UseVisualStyleBackColor = true;
-            this.btnLedare.Click += new System.EventHandler(this.btnLedare_Click);
             // 
             // cmbtgrupp
             // 
@@ -301,7 +300,7 @@
         private System.Windows.Forms.Button btnUtskrift;
         private System.Windows.Forms.TextBox tbxdatum1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txbdatum2;
+        private System.Windows.Forms.TextBox tbxdatum2;
         private System.Windows.Forms.ListBox lbxTgrupp;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox lbxLedare;

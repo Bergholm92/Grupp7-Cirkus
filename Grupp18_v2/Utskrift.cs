@@ -13,12 +13,12 @@ namespace Grupp18_v2
         public string Förnamn { get; set; }
         public string Efternamn { get; set; }
         public string Showutskrift { get { return Förnamn + " " + Efternamn + " "; } }
-        public Utskrift(string beskrivning, DateTime datum, string förnamn, string efternamn)
-        {
-            Beskrivning = beskrivning;
-            Datum = datum;
-            Förnamn = förnamn;
-            Efternamn = efternamn;
-        }
+     //   public Utskrift(string beskrivning, DateTime datum, string förnamn, string efternamn)
+        //{
+        //    Beskrivning = beskrivning;
+        //    Datum = datum;
+        //    Förnamn = förnamn;
+        //    Efternamn = efternamn;
+        //}
     }
 }

@@ -54,8 +54,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.cbxfoto = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.cbxmedlems = new System.Windows.Forms.ComboBox();
-            this.tbxmedlemstyp = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnTraning = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -286,27 +286,27 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // cbxmedlems
+            // comboBox1
             // 
-            this.cbxmedlems.FormattingEnabled = true;
-            this.cbxmedlems.Items.AddRange(new object[] {
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
             "Medlem",
             "Prova-På",
             "Cirkusvän"});
-            this.cbxmedlems.Location = new System.Drawing.Point(298, 175);
-            this.cbxmedlems.Name = "cbxmedlems";
-            this.cbxmedlems.Size = new System.Drawing.Size(71, 21);
-            this.cbxmedlems.TabIndex = 32;
-            this.cbxmedlems.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.Location = new System.Drawing.Point(298, 175);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(71, 21);
+            this.comboBox1.TabIndex = 32;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // tbxmedlemstyp
+            // textBox11
             // 
-            this.tbxmedlemstyp.Location = new System.Drawing.Point(298, 145);
-            this.tbxmedlemstyp.Margin = new System.Windows.Forms.Padding(2);
-            this.tbxmedlemstyp.Name = "tbxmedlemstyp";
-            this.tbxmedlemstyp.ReadOnly = true;
-            this.tbxmedlemstyp.Size = new System.Drawing.Size(70, 20);
-            this.tbxmedlemstyp.TabIndex = 24;
+            this.textBox11.Location = new System.Drawing.Point(298, 145);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(70, 20);
+            this.textBox11.TabIndex = 24;
             // 
             // button1
             // 
@@ -320,11 +320,11 @@
             // 
             // btnTraning
             // 
-            this.btnTraning.Location = new System.Drawing.Point(442, 290);
+            this.btnTraning.Location = new System.Drawing.Point(465, 290);
             this.btnTraning.Name = "btnTraning";
-            this.btnTraning.Size = new System.Drawing.Size(140, 23);
+            this.btnTraning.Size = new System.Drawing.Size(116, 51);
             this.btnTraning.TabIndex = 34;
-            this.btnTraning.Text = "Lägg till träningsgrupp";
+            this.btnTraning.Text = "Lägg till medlemmar i träningsgrupp";
             this.btnTraning.UseVisualStyleBackColor = true;
             this.btnTraning.Click += new System.EventHandler(this.btnTraning_Click);
             // 
@@ -335,12 +335,12 @@
             this.ClientSize = new System.Drawing.Size(638, 422);
             this.Controls.Add(this.btnTraning);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.cbxmedlems);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cbxfoto);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.lblMId);
-            this.Controls.Add(this.tbxmedlemstyp);
+            this.Controls.Add(this.textBox11);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbxmedlemsid);
             this.Controls.Add(this.tbxprsnummer);
@@ -399,8 +399,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox cbxfoto;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox cbxmedlems;
-        private System.Windows.Forms.TextBox tbxmedlemstyp;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnTraning;
     }
