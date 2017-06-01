@@ -71,7 +71,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Ingar.cs" />
-    <Compile Include="Ledare.cs" />
     <Compile Include="LedareForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,9 +78,7 @@
       <DependentUpon>LedareForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Medlem.cs" />
-    <Compile Include="Medlemstyp.cs" />
     <Compile Include="Narvaro.cs" />
-    <Compile Include="Plats.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traningsgrupp.cs" />
@@ -92,7 +89,6 @@
       <DependentUpon>TraningsgruppForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Träning.cs" />
-    <Compile Include="Utskrift.cs" />
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
