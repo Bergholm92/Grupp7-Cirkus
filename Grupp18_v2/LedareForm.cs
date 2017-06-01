@@ -29,6 +29,7 @@ namespace Grupp18_v2
         string filepath;
         int medlems_id;
         int träning;
+        
 
         DateTime d1;
         DateTime d2;
@@ -38,8 +39,6 @@ namespace Grupp18_v2
         {
             InitializeComponent();
             UpdateAll();
-
-
 
         }
         public string pdfutskriftdatum(string path)
@@ -318,33 +317,21 @@ namespace Grupp18_v2
 
         private List<Medlem> GetMedlemmar(List<Medlem> medlemmar)
         {
-            int id;
+           
             
             try
             {
                 conn.Open();
                 cmd = new NpgsqlCommand("SELECT * FROM medlem INNER JOIN ingar ON ingar.medlems_id=medlem.medlems_id WHERE ingar.traningsgrupp_id = @id; ", conn);
 
-                if (comboBox1.SelectedItem == "Akrobatik")
+                if (cmbtgrupp.SelectedIndex > -1)
                 {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@id", id);
+                    Traningsgrupp TG;
+                    TG =  (Traningsgrupp)cmbtgrupp.SelectedItem;
+                    
+                    cmd.Parameters.AddWithValue("@id", TG.Traningsgrupp_id);
                 }
-                else if (comboBox1.SelectedItem == "Jonglering")
-                {
-                    id = 2;
-                    cmd.Parameters.AddWithValue("@id", id);
-                }
-                else if (comboBox1.SelectedItem == "Klot")
-                {
-                    id = 3;
-                    cmd.Parameters.AddWithValue("@id", id);
-                }
-                else if (comboBox1.SelectedItem == null)
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@id", id);
-                }
+               
 
                 dr = cmd.ExecuteReader();
 
@@ -370,40 +357,27 @@ namespace Grupp18_v2
 
         public List<Träning> GetTräningar(List<Träning> Träningar)
         {
-            int id;
+          
             try
             {
                 conn.Open();
                 cmd = new NpgsqlCommand("Select traning_id, datum, beskrivning,plats_fk,traningsgrupp_fk, traningsgrupp.namn, plats.namn AS Plats from traning INNER JOIN traningsgrupp ON traningsgrupp.traningsgrupp_id = traning.traningsgrupp_fk INNER JOIN plats ON plats.plats_id=traning.plats_fk WHERE traning.traningsgrupp_fk = @tFK", conn);
-                
 
 
-                if (comboBox1.SelectedItem == "Akrobatik")
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == "Jonglering")
-                {
-                    id = 2;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == "Klot")
-                {
-                    id = 3;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                else if (comboBox1.SelectedItem == null)
-                {
-                    id = 1;
-                    cmd.Parameters.AddWithValue("@tFK", id);
-                }
-                dr = cmd.ExecuteReader();
 
-                while (dr.Read())
+                if (cmbtgrupp.SelectedIndex > -1)
                 {
+                    Traningsgrupp TG;
+                    TG = (Traningsgrupp)cmbtgrupp.SelectedItem;
+                    cmd.Parameters.AddWithValue("@tFK", TG.Traningsgrupp_id);
+                    dr = cmd.ExecuteReader();
 
-                    träningslist.Add(new Träning(dr.GetInt32(dr.GetOrdinal("traning_id")), dr.GetDateTime(dr.GetOrdinal("datum")), dr["beskrivning"].ToString(), dr.GetInt32(dr.GetOrdinal("traningsgrupp_fk")), dr.GetInt32(dr.GetOrdinal("plats_fk")), dr["namn"].ToString(), dr["Plats"].ToString()));
+                    while (dr.Read())
+                    {
+
+                        träningslist.Add(new Träning(dr.GetInt32(dr.GetOrdinal("traning_id")), dr.GetDateTime(dr.GetOrdinal("datum")), dr["beskrivning"].ToString(), dr.GetInt32(dr.GetOrdinal("traningsgrupp_fk")), dr.GetInt32(dr.GetOrdinal("plats_fk")), dr["namn"].ToString(), dr["Plats"].ToString()));
+                    }
+                    return Träningar;
                 }
                 return Träningar;
             }
@@ -511,6 +485,7 @@ namespace Grupp18_v2
             listBox4.Items.Clear();
             lbxLedare.Items.Clear();
             lbxTgrupp.Items.Clear();
+            cmbtgrupp.Items.Clear();
             medlemslist.Clear();
             träningslist.Clear();
             Närvarolist.Clear();
@@ -521,8 +496,8 @@ namespace Grupp18_v2
             Getnarvaro(Närvarolist);
             GetTraningsgrupp(Traningsgrupplist);
             GetLedare(Ledarlist);
-      
 
+            
             foreach (Medlem m in medlemslist)
             {
                 listBox2.Items.Add(m);
@@ -550,7 +525,7 @@ namespace Grupp18_v2
             }
             lbxLedare.DisplayMember = "ShowMembers";
 
-
+          
 
         }
         private void UpdateAll2()
@@ -631,9 +606,7 @@ namespace Grupp18_v2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             GetMedlemmar(medlemslist);
-            UpdateAll();
             Närvarolist.Clear();
             listBox3.Items.Clear();
         }
