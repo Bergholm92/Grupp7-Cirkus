@@ -641,7 +641,7 @@ namespace Grupp18_v2
                 träning = T.Tränings_id;
                 Närvarolist.Clear();
                 lbxnarvaro.Items.Clear();
-
+                UpdateAll2();
 
             }
             
@@ -756,9 +756,9 @@ namespace Grupp18_v2
             Traningsgrupp TG;
             TG = (Traningsgrupp)cmbtgrupp.SelectedItem;
             lbltraningar.Text = "Träningsgrupp: " + TG.Showtraningsgrupp;
-            UpdateAll2();
             UpdateAll();
-            
+            UpdateAll2();
+        
         }// Comboboxen som visar träningsgrupper. En label ändras beroende på den träningsgruppen man valde. 
     }
 }

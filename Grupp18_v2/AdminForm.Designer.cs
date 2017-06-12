@@ -46,7 +46,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tbxtele = new System.Windows.Forms.TextBox();
             this.tbxmobil = new System.Windows.Forms.TextBox();
-            this.tbxkön = new System.Windows.Forms.TextBox();
             this.tbxprsnummer = new System.Windows.Forms.TextBox();
             this.tbxmedlemsid = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,6 +57,7 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnTraning = new System.Windows.Forms.Button();
+            this.cmbkön = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lbxMedlem
@@ -212,13 +212,6 @@
             this.tbxmobil.Size = new System.Drawing.Size(100, 20);
             this.tbxmobil.TabIndex = 18;
             // 
-            // tbxkön
-            // 
-            this.tbxkön.Location = new System.Drawing.Point(175, 191);
-            this.tbxkön.Name = "tbxkön";
-            this.tbxkön.Size = new System.Drawing.Size(100, 20);
-            this.tbxkön.TabIndex = 20;
-            // 
             // tbxprsnummer
             // 
             this.tbxprsnummer.Location = new System.Drawing.Point(298, 58);
@@ -328,11 +321,23 @@
             this.btnTraning.UseVisualStyleBackColor = true;
             this.btnTraning.Click += new System.EventHandler(this.btnTraning_Click);
             // 
+            // cmbkön
+            // 
+            this.cmbkön.FormattingEnabled = true;
+            this.cmbkön.Items.AddRange(new object[] {
+            "Man",
+            "Kvinna"});
+            this.cmbkön.Location = new System.Drawing.Point(175, 191);
+            this.cmbkön.Name = "cmbkön";
+            this.cmbkön.Size = new System.Drawing.Size(100, 21);
+            this.cmbkön.TabIndex = 35;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 422);
+            this.Controls.Add(this.cmbkön);
             this.Controls.Add(this.btnTraning);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cbxtyp);
@@ -344,7 +349,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbxmedlemsid);
             this.Controls.Add(this.tbxprsnummer);
-            this.Controls.Add(this.tbxkön);
             this.Controls.Add(this.tbxmobil);
             this.Controls.Add(this.tbxtele);
             this.Controls.Add(this.label11);
@@ -391,7 +395,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbxtele;
         private System.Windows.Forms.TextBox tbxmobil;
-        private System.Windows.Forms.TextBox tbxkön;
         private System.Windows.Forms.TextBox tbxprsnummer;
         private System.Windows.Forms.TextBox tbxmedlemsid;
         private System.Windows.Forms.Label label6;
@@ -403,5 +406,6 @@
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnTraning;
+        private System.Windows.Forms.ComboBox cmbkön;
     }
 }

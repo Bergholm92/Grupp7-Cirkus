@@ -59,7 +59,7 @@ namespace Grupp18_v2
             tbxepost.Clear();
             tbxtele.Clear();
             tbxmobil.Clear();
-            tbxkön.Clear();
+            
             tbxprsnummer.Clear();
             tbxmedlemsid.Clear();
             textBox11.Clear();
@@ -90,7 +90,7 @@ namespace Grupp18_v2
             string adress = tbxadress.Text;
             string epost = tbxepost.Text;
             bool fotograferas = true;
-            string kön = tbxkön.Text;
+            string kön = cmbkön.Text;
             string mobiltelefon = tbxmobil.Text;
             string telefon = tbxtele.Text;
             DateTime personnummer = Convert.ToDateTime(tbxprsnummer.Text);
@@ -170,14 +170,14 @@ namespace Grupp18_v2
                 tbxtele.Text = Convert.ToString(M.Telefon);
                 tbxmobil.Text = Convert.ToString(M.Mobiltelefon);
                 cbxfoto.Checked = M.Fotograferas;
-                tbxkön.Text = M.Kön;
+                cmbkön.Text = M.Kön;
                 tbxprsnummer.Text = Convert.ToString(M.Personnummer);
                 tbxmedlemsid.Text = Convert.ToString(M.Medlems_id);
 
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
                 if (textBox11.Text == "1")
                 {
-                    cbxtyp.SelectedItem = "Medlem";
+                    cbxtyp.SelectedItem = "Medle";
 
                 }
                 else if (textBox11.Text == "2")
@@ -247,7 +247,7 @@ namespace Grupp18_v2
 
             try
             {
-                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), tbxkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(tbxprsnummer.Text));
+                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), cmbkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(tbxprsnummer.Text));
 
             }
             catch (NpgsqlException dx)
