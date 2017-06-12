@@ -63,11 +63,16 @@ namespace Grupp18_v2
                 {
                     Paragraph p2 = new Paragraph("NÄRVAROKORT: "+ tbxdatum1.Text + " - " + tbxdatum2.Text +  " \n \n");
                     doc.Add(p2);
+                    lbxutskrift.Items.Add("NÄRVAROKORT: " + tbxdatum1.Text + " - " + tbxdatum2.Text);
+                    lbxutskrift.Items.Add(" ");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
                     while (dr.Read())
                     {
                         //Lägger till en paragraph till dokumentet som innehåller det vi hämtar från databasen.
                         Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
                         doc.Add(p1);
+                        lbxutskrift.Items.Add( dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
+                        lbxutskrift.Items.Add(" ");
                     }
 
                     dr.Close();
@@ -81,12 +86,17 @@ namespace Grupp18_v2
                 {
                     Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
                     doc.Add(p1);
+                    lbxutskrift.Items.Add(" \n" + "LEDARE:");
+                    lbxutskrift.Items.Add(" ");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
-
                         doc.Add(p2);
+                        lbxutskrift.Items.Add(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
+                        lbxutskrift.Items.Add(" ");
+
                     }
                     dr.Close();
                 }
@@ -98,12 +108,17 @@ namespace Grupp18_v2
                 {
                     Paragraph p1 = new Paragraph(" \n" + "");
                     doc.Add(p1);
+                    
+                    lbxutskrift.Items.Add(" ");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
+
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade:" + dr["beskriv"].ToString() + " | ");
-
                         doc.Add(p2);
+                        lbxutskrift.Items.Add(" \n" + dr["antal"].ToString() + " st.  Tränade:" + dr["beskriv"].ToString() + " | ");
+                        lbxutskrift.Items.Add(" ");
                     }
                     dr.Close();
 
@@ -116,11 +131,14 @@ namespace Grupp18_v2
                 {
                     Paragraph p1 = new Paragraph(" \n" + "");
                     doc.Add(p1);
+                    lbxutskrift.Items.Add(" ");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " tillfällen tränade grupp:" + dr["namn"].ToString() + " | ");
-
+                        lbxutskrift.Items.Add(" \n" + dr["antalet"].ToString() + " tillfällen tränade grupp:" + dr["namn"].ToString() + " | ");
+                        lbxutskrift.Items.Add(" ");
                         doc.Add(p2);
                     }
                     //Stänger alla saker som dr:en, connectionen och dokumentet. Och skriver sedan ut en messagebox där det rapporteras att PDF-filen skapas. 
@@ -164,6 +182,8 @@ namespace Grupp18_v2
                     
                     Paragraph p2 = new Paragraph("NÄRVAROKORT för: " + L.ShowMembers + " \n \n");
                     doc.Add(p2);
+                    lbxutskrift.Items.Add("NÄRVAROKORT för: " + L.ShowMembers + " \n \n");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
                     while (dr.Read())
                     {
                         Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
@@ -329,6 +349,7 @@ namespace Grupp18_v2
                 doc.Open();
                 Paragraph p5 = new Paragraph("\n ANTAL TRÄNINGAR PER TRÄNINGSGRUPP \n");
                 doc.Add(p5);
+                
                 for (int i = 0; i < tarray.Length; i++)
                 {
 
@@ -343,6 +364,7 @@ namespace Grupp18_v2
                         }
                     }
                 }
+          
                 doc.Close();
                 conn.Close();
                 return path;
@@ -538,7 +560,7 @@ namespace Grupp18_v2
             lbxtraningar.Items.Clear();
             lbxmedlemmar.Items.Clear();
             lbxnarvaro.Items.Clear();
-            
+            lbxutskrift.Items.Clear();
             lbxLedare.Items.Clear();
             lbxTgrupp.Items.Clear();
      
@@ -596,7 +618,7 @@ namespace Grupp18_v2
             lbxnarvaro.Items.Clear();
             Närvarolist.Clear();
             Getnarvaro(Närvarolist);
-            
+            lbxutskrift.Items.Clear();
             foreach (Narvaro N in Närvarolist)
             {
                 lbxnarvaro.Items.Add(N);
@@ -680,7 +702,7 @@ namespace Grupp18_v2
 
         private void btnUtskrift_Click(object sender, EventArgs e)//Knappen för att skriva ut en utskrift baserat på datumintervall.
         {
-
+            UpdateAll();
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();//Här kommer dialogrutan upp så man kan spara sitt dokument på vald plats.
             saveFileDialog1.Filter = "PDF dokument|*.pdf";
             saveFileDialog1.Title = "Spara ett dokument";
@@ -689,7 +711,7 @@ namespace Grupp18_v2
             filepath = saveFileDialog1.FileName; //En string som helt enkelt sparar saveFileDialog1.FileName så vi kan använda den till de metoden som vill ha en filepath.
             pdfutskriftdatum(filepath);
             System.Diagnostics.Process.Start(filepath);
-            UpdateAll();
+            
 
 
 
@@ -722,6 +744,7 @@ namespace Grupp18_v2
 
         private void btnLedare_Click(object sender, EventArgs e)
         {
+            UpdateAll2();
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "PDF dokument|*.pdf";
             saveFileDialog1.Title = "Spara ett dokument";
@@ -730,7 +753,7 @@ namespace Grupp18_v2
             filepath = saveFileDialog1.FileName;
             pdfutskriftledare(filepath);
             System.Diagnostics.Process.Start(filepath);
-            UpdateAll();
+            
 
            
             

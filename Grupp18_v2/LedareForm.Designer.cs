@@ -49,6 +49,7 @@
             this.btnUtskrift = new System.Windows.Forms.Button();
             this.tbxdatum1 = new System.Windows.Forms.TextBox();
             this.cmbtgrupp = new System.Windows.Forms.ComboBox();
+            this.lbxutskrift = new System.Windows.Forms.ListBox();
             this.gbUtskrift.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -263,11 +264,23 @@
             this.cmbtgrupp.TabIndex = 12;
             this.cmbtgrupp.SelectedIndexChanged += new System.EventHandler(this.cmbtgrupp_SelectedIndexChanged);
             // 
+            // lbxutskrift
+            // 
+            this.lbxutskrift.FormattingEnabled = true;
+            this.lbxutskrift.HorizontalScrollbar = true;
+            this.lbxutskrift.Location = new System.Drawing.Point(886, 38);
+            this.lbxutskrift.Name = "lbxutskrift";
+            this.lbxutskrift.ScrollAlwaysVisible = true;
+            this.lbxutskrift.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lbxutskrift.Size = new System.Drawing.Size(441, 511);
+            this.lbxutskrift.TabIndex = 13;
+            // 
             // LedareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 684);
+            this.ClientSize = new System.Drawing.Size(1323, 684);
+            this.Controls.Add(this.lbxutskrift);
             this.Controls.Add(this.cmbtgrupp);
             this.Controls.Add(this.gbUtskrift);
             this.Controls.Add(this.btntabort);
@@ -309,5 +322,6 @@
         private System.Windows.Forms.Button btnTgrupp;
         private System.Windows.Forms.Button btnLedare;
         private System.Windows.Forms.ComboBox cmbtgrupp;
+        private System.Windows.Forms.ListBox lbxutskrift;
     }
 }
