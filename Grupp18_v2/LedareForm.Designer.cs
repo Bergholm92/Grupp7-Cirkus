@@ -293,6 +293,7 @@
             this.Controls.Add(this.lbxmedlemmar);
             this.Name = "LedareForm";
             this.Text = "LedareForm";
+            this.Load += new System.EventHandler(this.LedareForm_Load);
             this.gbUtskrift.ResumeLayout(false);
             this.gbUtskrift.PerformLayout();
             this.ResumeLayout(false);

@@ -783,5 +783,10 @@ namespace Grupp18_v2
             UpdateAll2();
         
         }// Comboboxen som visar träningsgrupper. En label ändras beroende på den träningsgruppen man valde. 
+
+        private void LedareForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
