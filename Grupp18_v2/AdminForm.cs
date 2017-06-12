@@ -177,7 +177,7 @@ namespace Grupp18_v2
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
                 if (textBox11.Text == "1")
                 {
-                    cbxtyp.SelectedItem = "Medle";
+                    cbxtyp.SelectedItem = "Medlem";
 
                 }
                 else if (textBox11.Text == "2")
