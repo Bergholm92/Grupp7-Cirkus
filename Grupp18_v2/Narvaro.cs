@@ -16,7 +16,7 @@ namespace Grupp18_v2
         public int Medlem;
         string Medlem_namn;
         List<Narvaro> Närvarolist = new List<Narvaro>();
-        public string Shownarvaro { get { return Medlem_namn + "       Deltar!"; } }
+        public string Shownarvaro { get { return "Medlemsid: "+ Medlem + " Namn: " + Medlem_namn  + " | Deltar!"; } }
         public Narvaro(int traning, int medlem)
         {
             Traning = traning;

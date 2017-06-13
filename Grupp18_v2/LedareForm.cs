@@ -79,7 +79,7 @@ namespace Grupp18_v2
                     dr.Close();
                 }
                 // Samma som ovan
-                cmd = new NpgsqlCommand("SELECT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where traning.datum BETWEEN @d1 AND @d2", conn);
+                cmd = new NpgsqlCommand("SELECT DISTINCT medlem.medlems_id, medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where traning.datum BETWEEN @d1 AND @d2", conn);
                 cmd.Parameters.AddWithValue("@d1", d1);
                 cmd.Parameters.AddWithValue("@d2", d2);
 
@@ -195,23 +195,28 @@ namespace Grupp18_v2
                     {
                         Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
                         doc.Add(p1);
+                        lbxutskrift.Items.Add(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
+                        lbxutskrift.Items.Add(" ");
                     }
 
                     dr.Close();
                 }
-                cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where medlem.medlems_id=@mid", conn);
+                cmd = new NpgsqlCommand("SELECT DISTINCT medlem.medlems_id, medlem.förnamn as fn, medlem.efternamn as en from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id where medlem.medlems_id=@mid", conn);
                 cmd.Parameters.AddWithValue("@mid", medlems_id);
 
                 using (dr = cmd.ExecuteReader())
                 {
                     Paragraph p1 = new Paragraph(" \n" + "LEDARE:");
                     doc.Add(p1);
+                    lbxutskrift.Items.Add("LEDARE:");
+                    lbxutskrift.Items.Add("------------------------------------------------------");
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
-
                         doc.Add(p2);
+                        lbxutskrift.Items.Add(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " | ");
+                        lbxutskrift.Items.Add(" ");
                     }
                     dr.Close();
                 }
@@ -221,12 +226,15 @@ namespace Grupp18_v2
                 {
                     Paragraph p1 = new Paragraph(" \n" + "");
                     doc.Add(p1);
+                    lbxutskrift.Items.Add(" ");
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["antal"].ToString() + " st.  Tränade: " + dr["bes"].ToString() + " | ");
 
                         doc.Add(p2);
+                        lbxutskrift.Items.Add(" \n" + dr["antal"].ToString() + " st.  Tränade: " + dr["bes"].ToString() + " | ");
+                        lbxutskrift.Items.Add(" ");
                     }
                     dr.Close();
 
@@ -237,12 +245,15 @@ namespace Grupp18_v2
                 {
                     Paragraph p1 = new Paragraph(" \n" + "");
                     doc.Add(p1);
+                    lbxutskrift.Items.Add(" ");
                     while (dr.Read())
 
                     {
                         Paragraph p2 = new Paragraph(" \n" + dr["antalet"].ToString() + " gånger ledde :" + dr["fnamn"].ToString() + " " + dr["enamn"].ToString() + " olika träningar | ");
 
                         doc.Add(p2);
+                        lbxutskrift.Items.Add(" \n" + dr["antalet"].ToString() + " gånger ledde :" + dr["fnamn"].ToString() + " " + dr["enamn"].ToString() + " olika träningar | ");
+                        lbxutskrift.Items.Add(" ");
                     }
                     dr.Close();
                     conn.Close();
@@ -294,6 +305,8 @@ namespace Grupp18_v2
                 
                 Paragraph p2 = new Paragraph("NÄRVAROKORT för grupperna:"  + tgrupp + " \n \n");
                 doc.Add(p2);
+                lbxutskrift.Items.Add("NÄRVAROKORT för grupperna:" + tgrupp + " \n \n");
+                lbxutskrift.Items.Add("------------------------------------------------------");
                 //Här gör vi även en for-loop som för varje tarray-item kör den igenom och lägger då till tarray[i].Traningsgrupp_id till SQL frågan vilket då gör att vi får med varje träningsgrupp som är selectad.
                 for (int i = 0; i < tarray.Length; i++)
                 {
@@ -310,6 +323,8 @@ namespace Grupp18_v2
                             //Samma här lägger vi till alla valda stringar till paragraphen. 
                             Paragraph p1 = new Paragraph(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
                             doc.Add(p1);
+                            lbxutskrift.Items.Add(dr["fn"].ToString() + " " + dr["en"].ToString() + " | " + dr["pers"].ToString() + " | " + dr["bes"].ToString() + " | " + dr["dat"].ToString());
+                            lbxutskrift.Items.Add(" ");
                         }
                     }
 
@@ -317,11 +332,13 @@ namespace Grupp18_v2
                 doc.Open();
                 Paragraph p3 = new Paragraph("\n  LEDARE: \n");
                 doc.Add(p3);
+                lbxutskrift.Items.Add("\n  LEDARE: \n");
+                lbxutskrift.Items.Add("------------------------------------------------------");
                 for (int i = 0; i < tarray.Length; i++)
                 {
                     doc.Open();
 
-                    cmd = new NpgsqlCommand("SELECT DISTINCT medlem.förnamn as fn, medlem.efternamn as en, traning.beskrivning as bes from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id INNER JOIN traningsgrupp ON traning.traningsgrupp_fk = traningsgrupp.traningsgrupp_id where traningsgrupp_id = @tgid; ", conn);
+                    cmd = new NpgsqlCommand("SELECT DISTINCT medlem.medlems_id, medlem.förnamn as fn, medlem.efternamn as en, traning.beskrivning as bes from medlem INNER JOIN leder ON medlem.medlems_id = leder.medlems_id INNER JOIN traning ON leder.traning_id = traning.traning_id INNER JOIN traningsgrupp ON traning.traningsgrupp_fk = traningsgrupp.traningsgrupp_id where traningsgrupp_id = @tgid; ", conn);
                     cmd.Parameters.AddWithValue("@tgid", tarray[i].Traningsgrupp_id);
                     using (dr = cmd.ExecuteReader())
                     {
@@ -331,6 +348,9 @@ namespace Grupp18_v2
                         {
                             Paragraph p1 = new Paragraph(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " |  Träning: " + dr["bes"].ToString());
                             doc.Add(p1);
+                            lbxutskrift.Items.Add(" \n" + dr["fn"].ToString() + " " + dr["en"].ToString() + " |  Träning: " + dr["bes"].ToString());
+                            lbxutskrift.Items.Add(" ");
+
                         }
                     }
 
@@ -339,6 +359,8 @@ namespace Grupp18_v2
                 doc.Open();
                 Paragraph p4 = new Paragraph("\n Antal medlemmar på olika träningar: \n");
                 doc.Add(p4);
+                lbxutskrift.Items.Add("\n Antal medlemmar på olika träningar: \n");
+                lbxutskrift.Items.Add("------------------------------------------------------");
                 for (int i = 0; i < tarray.Length; i++)
                 {
 
@@ -350,13 +372,17 @@ namespace Grupp18_v2
                         {
                             Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st    tränade" + " | " + dr["bes"].ToString());
                             doc.Add(p1);
+                            lbxutskrift.Items.Add(" \n" + dr["antal"].ToString() + " st    tränade" + " | " + dr["bes"].ToString());
+                            lbxutskrift.Items.Add(" ");
                         }
                     }
                 }
                 doc.Open();
                 Paragraph p5 = new Paragraph("\n ANTAL TRÄNINGAR PER TRÄNINGSGRUPP \n");
                 doc.Add(p5);
-                
+                lbxutskrift.Items.Add("\n ANTAL TRÄNINGAR PER TRÄNINGSGRUPP \n");
+                lbxutskrift.Items.Add("------------------------------------------------------");
+
                 for (int i = 0; i < tarray.Length; i++)
                 {
 
@@ -368,6 +394,8 @@ namespace Grupp18_v2
                         {
                             Paragraph p1 = new Paragraph(" \n" + dr["antal"].ToString() + " st träningar   har genomförst av " + "  " + dr["namn"].ToString() + " gruppen");
                             doc.Add(p1);
+                            lbxutskrift.Items.Add(" \n" + dr["antal"].ToString() + " st träningar   har genomförst av " + "  " + dr["namn"].ToString() + " gruppen");
+                lbxutskrift.Items.Add(" ");
                         }
                     }
                 }
@@ -624,6 +652,8 @@ namespace Grupp18_v2
         private void UpdateAll2()//En annan update-metod som har i fokus att endast beröra närvarolistan vilket vi gjorde i en separat metod.
         {
             lbxnarvaro.Items.Clear();
+            lbxutskrift.Items.Clear();
+           
             Närvarolist.Clear();
             Getnarvaro(Närvarolist);
             lbxutskrift.Items.Clear();
@@ -755,7 +785,7 @@ namespace Grupp18_v2
 
         private void btnTgrupp_Click(object sender, EventArgs e)//Knappen för att skriva ut en utskrift baserat på träningsgrupper. Samma saker sker här som i knappen ovan. 
         {
-
+            UpdateAll2();
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "PDF dokument|*.pdf";
             saveFileDialog1.Title = "Spara ett dokument";
@@ -767,7 +797,8 @@ namespace Grupp18_v2
             pdfutskriftTgrupp(filepath);
          
             System.Diagnostics.Process.Start(filepath);
-            UpdateAll();
+            lbxTgrupp.ClearSelected();
+
         }
 
         private void btnLedare_Click(object sender, EventArgs e)

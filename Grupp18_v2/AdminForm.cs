@@ -61,7 +61,7 @@ namespace Grupp18_v2
             tbxepost.Clear();
             tbxtele.Clear();
             tbxmobil.Clear();
-
+            btnCreate.Enabled = true;
             tbxprsnummer.Clear();
             tbxmedlemsid.Clear();
             textBox11.Clear();
@@ -159,7 +159,7 @@ namespace Grupp18_v2
 
         private void lbxMedlem_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           
             ListBox L = sender as ListBox;
             if (L.SelectedIndex != -1)
             {
@@ -177,6 +177,7 @@ namespace Grupp18_v2
                 tbxmedlemsid.Text = Convert.ToString(M.Medlems_id);
 
                 textBox11.Text = Convert.ToString(M.Medlemstyp_id);
+                btnCreate.Enabled = false;
                 if (textBox11.Text == "1")
                 {
                     cbxtyp.SelectedItem = "Medlem";
@@ -452,6 +453,7 @@ namespace Grupp18_v2
         private void button1_Click(object sender, EventArgs e)
         {
             UpdateAll();
+           
         }
 
         private void btnTraning_Click(object sender, EventArgs e)//Knapp som tar oss till formen där man kan lägga till medlemmar till olika träningsgrupper. 

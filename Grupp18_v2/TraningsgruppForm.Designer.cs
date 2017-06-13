@@ -70,18 +70,18 @@
             this.lblmedlemmar.AutoSize = true;
             this.lblmedlemmar.Location = new System.Drawing.Point(12, 14);
             this.lblmedlemmar.Name = "lblmedlemmar";
-            this.lblmedlemmar.Size = new System.Drawing.Size(61, 13);
+            this.lblmedlemmar.Size = new System.Drawing.Size(128, 13);
             this.lblmedlemmar.TabIndex = 3;
-            this.lblmedlemmar.Text = "Medlemmar";
+            this.lblmedlemmar.Text = "Alla cirkusens medlemmar";
             // 
             // lblträningsgrupp
             // 
             this.lblträningsgrupp.AutoSize = true;
             this.lblträningsgrupp.Location = new System.Drawing.Point(312, 14);
             this.lblträningsgrupp.Name = "lblträningsgrupp";
-            this.lblträningsgrupp.Size = new System.Drawing.Size(84, 13);
+            this.lblträningsgrupp.Size = new System.Drawing.Size(100, 13);
             this.lblträningsgrupp.TabIndex = 4;
-            this.lblträningsgrupp.Text = "Träningsgrupper";
+            this.lblträningsgrupp.Text = "Alla träningsgrupper";
             // 
             // lbxdeltagare
             // 
@@ -94,7 +94,7 @@
             // lbldeltagare
             // 
             this.lbldeltagare.AutoSize = true;
-            this.lbldeltagare.Location = new System.Drawing.Point(316, 304);
+            this.lbldeltagare.Location = new System.Drawing.Point(312, 304);
             this.lbldeltagare.Name = "lbldeltagare";
             this.lbldeltagare.Size = new System.Drawing.Size(158, 13);
             this.lbldeltagare.TabIndex = 6;
