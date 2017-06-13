@@ -274,6 +274,7 @@ namespace Grupp18_v2
                 }
                 else
                 {
+
                     MessageBox.Show("Fel inmatning");
                 }
 
