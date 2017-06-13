@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Text.RegularExpressions;
+
 
 namespace Grupp18_v2
 {
@@ -59,7 +61,7 @@ namespace Grupp18_v2
             tbxepost.Clear();
             tbxtele.Clear();
             tbxmobil.Clear();
-            
+
             tbxprsnummer.Clear();
             tbxmedlemsid.Clear();
             textBox11.Clear();
@@ -242,18 +244,49 @@ namespace Grupp18_v2
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-     
+
+            //Möjlighet att se om det finns annat än nummer i personnummer-textboxen.
+            
+            Regex nummer = new Regex("[0-9]");
+            Regex att = new Regex("[@.]");
+            Regex streck = new Regex("[-]");
+            Regex bokstav = new Regex("[a-ö]");
+            Match personNr = nummer.Match(tbxprsnummer.Text);
+            Match personNrstreck = streck.Match(tbxprsnummer.Text);
+            Match mail = att.Match(tbxepost.Text);
+            Match mobil = nummer.Match(tbxmobil.Text);
+            Match telefon = nummer.Match(tbxtele.Text);
+            Match telefonbokstav = bokstav.Match(tbxtele.Text);
+            Match mobilbokstav = bokstav.Match(tbxmobil.Text);
+           
+
+
 
 
             try
             {
-                AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), cmbkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(tbxprsnummer.Text));
+                if (personNr.Success && personNrstreck.Success && mail.Success && mobil.Success && telefon.Success && !telefonbokstav.Success && !mobilbokstav.Success)
+                {
+
+                    AddMedlem_2(tbxfnamn.Text, tbxenamn.Text, tbxadress.Text, tbxepost.Text, Convert.ToBoolean(cbxfoto.Checked), cmbkön.Text, tbxmobil.Text, tbxtele.Text, Convert.ToInt32(textBox11.Text), Convert.ToDateTime(tbxprsnummer.Text));
+
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Fel inmatning");
+                }
 
             }
             catch (NpgsqlException dx)
             {
 
                 MessageBox.Show(dx.Message);
+            }
+            catch (Exception s)
+            {
+                MessageBox.Show(s.Message);
             }
             UpdateAll();
         }
@@ -371,7 +404,7 @@ namespace Grupp18_v2
 
                 textBox11.Text = "3";
             }
-     
+
 
         }
 
