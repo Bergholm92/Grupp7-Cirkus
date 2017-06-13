@@ -653,6 +653,7 @@ namespace Grupp18_v2
                 lbxmedlemmar.SelectedIndex = L.SelectedIndex;
                 Medlem M = (Medlem)lbxmedlemmar.SelectedItem;
                 medlems_id = M.Medlems_id;
+
                
                 
 
