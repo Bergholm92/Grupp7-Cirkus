@@ -11,6 +11,7 @@ using Npgsql;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Grupp18_v2
 {
@@ -153,9 +154,15 @@ namespace Grupp18_v2
 
                 return path;
             }
-            catch
+            //catch
+            //{
+            //    MessageBox.Show("Fel inmatning");
+                
+            //     return null;
+            //}
+            catch(Exception ex)
             {
-                MessageBox.Show("Fel inmatning");
+                MessageBox.Show(ex.Message);
                 return null;
             }
             finally
@@ -478,6 +485,7 @@ namespace Grupp18_v2
                 cmd = new NpgsqlCommand("SELECT narvaro.tranings_id,narvaro.medlems_id, medlem.förnamn AS förnamn from narvaro INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id WHERE tranings_id=@id ", conn);
                 cmd.Parameters.AddWithValue("@id", träning);
                 dr = cmd.ExecuteReader();
+
                 while (dr.Read())
                 {
 
@@ -646,6 +654,7 @@ namespace Grupp18_v2
                 lbxmedlemmar.SelectedIndex = L.SelectedIndex;
                 Medlem M = (Medlem)lbxmedlemmar.SelectedItem;
                 medlems_id = M.Medlems_id;
+
                
                 
 
@@ -702,17 +711,36 @@ namespace Grupp18_v2
 
         private void btnUtskrift_Click(object sender, EventArgs e)//Knappen för att skriva ut en utskrift baserat på datumintervall.
         {
-            UpdateAll();
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();//Här kommer dialogrutan upp så man kan spara sitt dokument på vald plats.
-            saveFileDialog1.Filter = "PDF dokument|*.pdf";
-            saveFileDialog1.Title = "Spara ett dokument";
-            saveFileDialog1.ShowDialog();
+            Regex datum = new Regex("[0-9]");
+            Regex datumbokstav = new Regex("[a-ö]");
+            Match datumsif1 =  datum.Match(tbxdatum1.Text);
+            Match datumbok1 = datumbokstav.Match(tbxdatum1.Text);
+            Match datumsif2 = datum.Match(tbxdatum2.Text);
+            Match datumsbok2 = datumbokstav.Match(tbxdatum2.Text);
 
-            filepath = saveFileDialog1.FileName; //En string som helt enkelt sparar saveFileDialog1.FileName så vi kan använda den till de metoden som vill ha en filepath.
-            pdfutskriftdatum(filepath);
-            System.Diagnostics.Process.Start(filepath);
+
+            
+                if (datumsif1.Success && !datumbok1.Success && !datumsbok2.Success && datumsif2.Success)
+                {
+                    UpdateAll();
+                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();//Här kommer dialogrutan upp så man kan spara sitt dokument på vald plats.
+                    saveFileDialog1.Filter = "PDF dokument|*.pdf";
+                    saveFileDialog1.Title = "Spara ett dokument";
+                    saveFileDialog1.ShowDialog();
+
+                    filepath = saveFileDialog1.FileName; //En string som helt enkelt sparar saveFileDialog1.FileName så vi kan använda den till de metoden som vill ha en filepath.
+                    pdfutskriftdatum(filepath);
+                    System.Diagnostics.Process.Start(filepath);
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Fel inmatning");
+                }
             
 
+           
 
 
 
