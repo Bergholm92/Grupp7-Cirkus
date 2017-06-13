@@ -485,6 +485,7 @@ namespace Grupp18_v2
                 cmd = new NpgsqlCommand("SELECT narvaro.tranings_id,narvaro.medlems_id, medlem.förnamn AS förnamn from narvaro INNER JOIN medlem ON medlem.medlems_id = narvaro.medlems_id WHERE tranings_id=@id ", conn);
                 cmd.Parameters.AddWithValue("@id", träning);
                 dr = cmd.ExecuteReader();
+
                 while (dr.Read())
                 {
 
