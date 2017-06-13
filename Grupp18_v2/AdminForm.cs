@@ -359,9 +359,50 @@ namespace Grupp18_v2
 
         }//Metod som gör det möjligt att lägga till en medlem. 
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnChange_Click(object sender, EventArgs e)
         {
-            ChangeMedlem();
+            //Regex
+            Regex nummer = new Regex("[0-9]");
+            Regex att = new Regex("[@.]");
+            Regex streck = new Regex("[-]");
+            Regex bokstav = new Regex("[a-ö]");
+            Match personNr = nummer.Match(tbxprsnummer.Text);
+            Match personNrstreck = streck.Match(tbxprsnummer.Text);
+            Match mail = att.Match(tbxepost.Text);
+            Match mobil = nummer.Match(tbxmobil.Text);
+            Match telefon = nummer.Match(tbxtele.Text);
+            Match telefonbokstav = bokstav.Match(tbxtele.Text);
+            Match mobilbokstav = bokstav.Match(tbxmobil.Text);
+
+
+            try
+            {
+                if (personNr.Success && personNrstreck.Success && mail.Success && mobil.Success && telefon.Success && !telefonbokstav.Success && !mobilbokstav.Success)
+                {
+
+                    ChangeMedlem();
+
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Fel inmatning");
+                }
+
+            }
+            catch (NpgsqlException dx)
+            {
+
+                MessageBox.Show(dx.Message);
+            }
+            catch (Exception s)
+            {
+                MessageBox.Show(s.Message);
+            }
+
+
+            
             UpdateAll();
         }
 

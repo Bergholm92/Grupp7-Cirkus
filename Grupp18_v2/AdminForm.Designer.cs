@@ -276,7 +276,7 @@
             this.btnChange.TabIndex = 28;
             this.btnChange.Text = "Ändra";
             this.btnChange.UseVisualStyleBackColor = true;
-            this.btnChange.Click += new System.EventHandler(this.button3_Click);
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // cbxfoto
             // 
