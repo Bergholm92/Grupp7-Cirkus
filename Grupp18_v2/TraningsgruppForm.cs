@@ -16,6 +16,7 @@ namespace Grupp18_v2
         NpgsqlCommand cmd = new NpgsqlCommand();
         NpgsqlDataReader dr;
         List<Medlem> medlemslist = new List<Medlem>();
+        List<Medlem> deltagarelist = new List<Medlem>();
         List<Traningsgrupp> Traningsgrupplist = new List<Traningsgrupp>();
         int medlems_id;
         int traningsgrupp;
@@ -33,7 +34,7 @@ namespace Grupp18_v2
             try
             {
                 conn.Open();
-                cmd = new NpgsqlCommand("SELECT * FROM medlem", conn);
+                cmd = new NpgsqlCommand("SELECT * FROM medlem ", conn);
                 dr = cmd.ExecuteReader();
 
 
@@ -55,6 +56,37 @@ namespace Grupp18_v2
                 conn.Close();
             }
         }
+
+        private List<Medlem> Getdeltagare(List<Medlem> deltagare)
+        {
+
+            try
+            {
+                conn.Open();
+                cmd = new NpgsqlCommand("select * from medlem inner join ingar on medlem.medlems_id = ingar.medlems_id inner join traningsgrupp on ingar.traningsgrupp_id = traningsgrupp.traningsgrupp_id where traningsgrupp.traningsgrupp_id=@id", conn);
+                cmd.Parameters.AddWithValue("@id", traningsgrupp);
+                dr = cmd.ExecuteReader();
+
+
+
+                while (dr.Read())
+                {
+
+                    deltagarelist.Add(new Medlem(dr.GetInt32(dr.GetOrdinal("medlems_id")), dr["förnamn"].ToString(), dr["efternamn"].ToString(), dr["adress"].ToString(), dr["epost"].ToString(), dr["telefon"].ToString(), dr["mobiltelefon"].ToString(), dr.GetBoolean(dr.GetOrdinal("fotograferas")), dr["kön"].ToString(), dr.GetInt32(dr.GetOrdinal("medlemstyp_id")), dr.GetDateTime(dr.GetOrdinal("personnummer"))));
+                }
+                return deltagare;
+            }
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
         private List<Traningsgrupp> GetTraningsgrupp(List<Traningsgrupp> traningsgrupper)
         {
@@ -90,22 +122,46 @@ namespace Grupp18_v2
         {
             lbxMedlem.Items.Clear();
             lbxTraningsgrupp.Items.Clear();
+            lbxdeltagare.Items.Clear();
             medlemslist.Clear();
+            deltagarelist.Clear();
             Traningsgrupplist.Clear();
             GetTraningsgrupp(Traningsgrupplist);
             GetMedlemmar(medlemslist);
+            Getdeltagare(deltagarelist);
            
             foreach (Medlem m in medlemslist)
             {
                 lbxMedlem.Items.Add(m);
             }
             lbxMedlem.DisplayMember = "ShowMembers";
-
+            foreach (Medlem n in deltagarelist)
+            {
+                lbxdeltagare.Items.Add(n);
+            }
+            lbxdeltagare.DisplayMember = "ShowMembers";
             foreach (Traningsgrupp T in Traningsgrupplist)
             {
                 lbxTraningsgrupp.Items.Add(T);
             }
             lbxTraningsgrupp.DisplayMember = "Showtraningsgrupp";
+
+        }
+
+        private void UpdateAll2()
+        {
+           
+            lbxdeltagare.Items.Clear();
+            deltagarelist.Clear();
+            Getdeltagare(deltagarelist);
+
+     
+            foreach (Medlem n in deltagarelist)
+            {
+                lbxdeltagare.Items.Add(n);
+            }
+            lbxdeltagare.DisplayMember = "ShowMembers";
+       
 
         }
 
@@ -124,11 +180,8 @@ namespace Grupp18_v2
                 lbxTraningsgrupp.SelectedIndex = T.SelectedIndex;
                 Traningsgrupp IN = (Traningsgrupp)lbxTraningsgrupp.SelectedItem;
                 traningsgrupp = IN.Traningsgrupp_id;
-               
-
-
-
-
+                //Getdeltagare(deltagarelist);
+                UpdateAll2();
             }
         }
 

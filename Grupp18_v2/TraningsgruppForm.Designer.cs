@@ -31,6 +31,10 @@
             this.lbxMedlem = new System.Windows.Forms.ListBox();
             this.btnIngar = new System.Windows.Forms.Button();
             this.lbxTraningsgrupp = new System.Windows.Forms.ListBox();
+            this.lblmedlemmar = new System.Windows.Forms.Label();
+            this.lblträningsgrupp = new System.Windows.Forms.Label();
+            this.lbxdeltagare = new System.Windows.Forms.ListBox();
+            this.lbldeltagare = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbxMedlem
@@ -61,17 +65,57 @@
             this.lbxTraningsgrupp.TabIndex = 2;
             this.lbxTraningsgrupp.SelectedIndexChanged += new System.EventHandler(this.lbxTraningsgrupp_SelectedIndexChanged);
             // 
+            // lblmedlemmar
+            // 
+            this.lblmedlemmar.AutoSize = true;
+            this.lblmedlemmar.Location = new System.Drawing.Point(12, 14);
+            this.lblmedlemmar.Name = "lblmedlemmar";
+            this.lblmedlemmar.Size = new System.Drawing.Size(61, 13);
+            this.lblmedlemmar.TabIndex = 3;
+            this.lblmedlemmar.Text = "Medlemmar";
+            // 
+            // lblträningsgrupp
+            // 
+            this.lblträningsgrupp.AutoSize = true;
+            this.lblträningsgrupp.Location = new System.Drawing.Point(312, 14);
+            this.lblträningsgrupp.Name = "lblträningsgrupp";
+            this.lblträningsgrupp.Size = new System.Drawing.Size(84, 13);
+            this.lblträningsgrupp.TabIndex = 4;
+            this.lblträningsgrupp.Text = "Träningsgrupper";
+            // 
+            // lbxdeltagare
+            // 
+            this.lbxdeltagare.FormattingEnabled = true;
+            this.lbxdeltagare.Location = new System.Drawing.Point(315, 320);
+            this.lbxdeltagare.Name = "lbxdeltagare";
+            this.lbxdeltagare.Size = new System.Drawing.Size(159, 173);
+            this.lbxdeltagare.TabIndex = 5;
+            // 
+            // lbldeltagare
+            // 
+            this.lbldeltagare.AutoSize = true;
+            this.lbldeltagare.Location = new System.Drawing.Point(316, 304);
+            this.lbldeltagare.Name = "lbldeltagare";
+            this.lbldeltagare.Size = new System.Drawing.Size(158, 13);
+            this.lbldeltagare.TabIndex = 6;
+            this.lbldeltagare.Text = "Deltagare på vald träningsgrupp";
+            // 
             // TraningsgruppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 354);
+            this.ClientSize = new System.Drawing.Size(506, 505);
+            this.Controls.Add(this.lbldeltagare);
+            this.Controls.Add(this.lbxdeltagare);
+            this.Controls.Add(this.lblträningsgrupp);
+            this.Controls.Add(this.lblmedlemmar);
             this.Controls.Add(this.lbxTraningsgrupp);
             this.Controls.Add(this.btnIngar);
             this.Controls.Add(this.lbxMedlem);
             this.Name = "TraningsgruppForm";
             this.Text = "TraningsgruppForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -80,5 +124,9 @@
         private System.Windows.Forms.ListBox lbxMedlem;
         private System.Windows.Forms.Button btnIngar;
         private System.Windows.Forms.ListBox lbxTraningsgrupp;
+        private System.Windows.Forms.Label lblmedlemmar;
+        private System.Windows.Forms.Label lblträningsgrupp;
+        private System.Windows.Forms.ListBox lbxdeltagare;
+        private System.Windows.Forms.Label lbldeltagare;
     }
 }
