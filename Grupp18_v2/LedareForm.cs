@@ -285,6 +285,7 @@ namespace Grupp18_v2
             {
                 //Denna metod blir lite annorlunda jämförelse med de andra. Eftersom man under just Träningsgrupp ville kunna använda en-eller flera så har vi skapat en for-loop
                 int count = 0;
+                tgrupp = null;
                 int antal = Convert.ToInt32(lbxTgrupp.SelectedItems.Count);
                 tarray = new Traningsgrupp[antal];
                 //Vi kör först en foreach-loop där vi loopar igenom alla träningsgrupper som är selectade i listboxen.

@@ -37,7 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btntabort = new System.Windows.Forms.Button();
             this.gbUtskrift = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnTgrupp = new System.Windows.Forms.Button();
             this.btnLedare = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,7 +52,7 @@
             this.lbxutskrift = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.gbUtskrift.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,8 +135,9 @@
             // 
             // gbUtskrift
             // 
-            this.gbUtskrift.Controls.Add(this.button1);
             this.gbUtskrift.Controls.Add(this.label8);
+            this.gbUtskrift.Controls.Add(this.btnTgrupp);
+            this.gbUtskrift.Controls.Add(this.btnLedare);
             this.gbUtskrift.Controls.Add(this.label7);
             this.gbUtskrift.Controls.Add(this.lbxLedare);
             this.gbUtskrift.Controls.Add(this.label6);
@@ -145,6 +145,7 @@
             this.gbUtskrift.Controls.Add(this.lbxTgrupp);
             this.gbUtskrift.Controls.Add(this.label4);
             this.gbUtskrift.Controls.Add(this.tbxdatum2);
+            this.gbUtskrift.Controls.Add(this.btnUtskrift);
             this.gbUtskrift.Controls.Add(this.tbxdatum1);
             this.gbUtskrift.Location = new System.Drawing.Point(415, 334);
             this.gbUtskrift.Name = "gbUtskrift";
@@ -153,18 +154,9 @@
             this.gbUtskrift.TabStop = false;
             this.gbUtskrift.Text = "Utskrift";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 54);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 13);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "(ÅÅÅÅ-MM-DD)";
-            // 
             // btnTgrupp
             // 
-            this.btnTgrupp.Location = new System.Drawing.Point(1232, 555);
+            this.btnTgrupp.Location = new System.Drawing.Point(15, 304);
             this.btnTgrupp.Name = "btnTgrupp";
             this.btnTgrupp.Size = new System.Drawing.Size(79, 35);
             this.btnTgrupp.TabIndex = 9;
@@ -174,7 +166,7 @@
             // 
             // btnLedare
             // 
-            this.btnLedare.Location = new System.Drawing.Point(1147, 552);
+            this.btnLedare.Location = new System.Drawing.Point(205, 299);
             this.btnLedare.Name = "btnLedare";
             this.btnLedare.Size = new System.Drawing.Size(79, 35);
             this.btnLedare.TabIndex = 10;
@@ -250,7 +242,7 @@
             // 
             // btnUtskrift
             // 
-            this.btnUtskrift.Location = new System.Drawing.Point(1055, 552);
+            this.btnUtskrift.Location = new System.Drawing.Point(336, 62);
             this.btnUtskrift.Name = "btnUtskrift";
             this.btnUtskrift.Size = new System.Drawing.Size(86, 35);
             this.btnUtskrift.TabIndex = 1;
@@ -305,13 +297,14 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "nedan";
             // 
-            // button1
+            // label8
             // 
-            this.button1.Location = new System.Drawing.Point(449, 221);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 35);
-            this.button1.TabIndex = 16;
-            this.button1.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "(ÅÅÅÅ-MM-DD)";
             // 
             // LedareForm
             // 
@@ -319,9 +312,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1323, 684);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnTgrupp);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnLedare);
             this.Controls.Add(this.lbxutskrift);
             this.Controls.Add(this.cmbtgrupp);
             this.Controls.Add(this.gbUtskrift);
@@ -330,7 +321,6 @@
             this.Controls.Add(this.lbxnarvaro);
             this.Controls.Add(this.lblmedlemmar);
             this.Controls.Add(this.lbltraningar);
-            this.Controls.Add(this.btnUtskrift);
             this.Controls.Add(this.lbxtraningar);
             this.Controls.Add(this.btnnarvaro);
             this.Controls.Add(this.lbxmedlemmar);
@@ -370,6 +360,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
     }
 }
