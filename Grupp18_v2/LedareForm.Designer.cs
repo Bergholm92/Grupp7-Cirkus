@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btntabort = new System.Windows.Forms.Button();
             this.gbUtskrift = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnTgrupp = new System.Windows.Forms.Button();
             this.btnLedare = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@
             this.lbxutskrift = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.gbUtskrift.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,6 +136,7 @@
             // 
             // gbUtskrift
             // 
+            this.gbUtskrift.Controls.Add(this.label9);
             this.gbUtskrift.Controls.Add(this.label8);
             this.gbUtskrift.Controls.Add(this.btnTgrupp);
             this.gbUtskrift.Controls.Add(this.btnLedare);
@@ -153,6 +155,15 @@
             this.gbUtskrift.TabIndex = 10;
             this.gbUtskrift.TabStop = false;
             this.gbUtskrift.Text = "Utskrift";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "(ÅÅÅÅ-MM-DD)";
             // 
             // btnTgrupp
             // 
@@ -297,14 +308,14 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "nedan";
             // 
-            // label8
+            // label9
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 54);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 13);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "(ÅÅÅÅ-MM-DD)";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(173, 54);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "(ÅÅÅÅ-MM-DD)";
             // 
             // LedareForm
             // 
@@ -360,5 +371,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
